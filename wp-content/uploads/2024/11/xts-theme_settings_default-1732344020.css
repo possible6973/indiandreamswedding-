@@ -1,0 +1,190 @@
+﻿@font-face {
+    font-weight: normal;
+    font-style: normal;
+    font-family: "woodmart-font";
+    src: url("//indiansdreamwedding.com/wp-content/themes/woodmart/fonts/woodmart-font-1-400.woff2?v=7.3.3") format("woff2");
+}
+
+.wd-popup.wd-promo-popup {
+    background-color: #111111;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+}
+
+.page-title-default {
+    background-color: #0a0a0a;
+    background-image: url(https://indiansdreamwedding.com/wp-content/uploads/2024/11/Group-114589880.png);
+    background-size: cover;
+    background-position: center center;
+}
+
+.footer-container {
+    background-color: rgb(99, 118, 84);
+    background-image: none;
+}
+
+:root {
+    --wd-text-font: "Lexend", Arial, Helvetica, sans-serif;
+    --wd-text-font-weight: 300;
+    --wd-text-color: #777777;
+    --wd-text-font-size: 16px;
+}
+
+:root {
+    --wd-title-font: "Cormorant", Arial, Helvetica, sans-serif;
+    --wd-title-font-weight: 600;
+    --wd-title-color: rgb(165, 175, 135);
+}
+
+:root {
+    --wd-entities-title-font: "Cormorant", Arial, Helvetica, sans-serif;
+    --wd-entities-title-font-weight: 600;
+    --wd-entities-title-color: #333333;
+    --wd-entities-title-color-hover: rgb(51 51 51 / 65%);
+}
+
+:root {
+    --wd-alternative-font: "Lexend", Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --wd-widget-title-font: "Cormorant", Arial, Helvetica, sans-serif;
+    --wd-widget-title-font-weight: 600;
+    --wd-widget-title-transform: capitalize;
+    --wd-widget-title-color: #333;
+    --wd-widget-title-font-size: 16px;
+}
+
+:root {
+    --wd-header-el-font: Arial, Helvetica, sans-serif;
+    --wd-header-el-font-weight: 500;
+    --wd-header-el-transform: capitalize;
+    --wd-header-el-font-size: 18px;
+}
+
+html .wd-nav-mobile>li>a {
+    text-transform: capitalize;
+}
+
+:root {
+    --wd-primary-color: rgb(230, 47, 91);
+}
+
+:root {
+    --wd-alternative-color: #fbbc34;
+}
+
+:root {
+    --wd-link-color: #333333;
+    --wd-link-color-hover: #242424;
+}
+
+:root {
+    --btn-default-bgcolor: #f7f7f7;
+}
+
+:root {
+    --btn-default-bgcolor-hover: #efefef;
+}
+
+:root {
+    --btn-accented-bgcolor: rgb(165, 175, 135);
+}
+
+:root {
+    --btn-accented-bgcolor-hover: rgb(150, 159, 123);
+}
+
+:root {
+    --btn-font-weight: 400;
+    --btn-transform: capitalize;
+}
+
+:root {
+    --notices-success-bg: #459647;
+}
+
+:root {
+    --notices-success-color: #fff;
+}
+
+:root {
+    --notices-warning-bg: #E0B252;
+}
+
+:root {
+    --notices-warning-color: #fff;
+}
+
+:root {
+    --wd-form-brd-radius: 0px;
+    --wd-form-brd-width: 2px;
+    --btn-default-color: #333;
+    --btn-default-color-hover: #333;
+    --btn-accented-color: #fff;
+    --btn-accented-color-hover: #fff;
+    --btn-default-brd-radius: 0px;
+    --btn-default-box-shadow: none;
+    --btn-default-box-shadow-hover: none;
+    --btn-default-box-shadow-active: none;
+    --btn-default-bottom: 0px;
+    --btn-accented-bottom-active: -1px;
+    --btn-accented-brd-radius: 0px;
+    --btn-accented-box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .15);
+    --btn-accented-box-shadow-hover: inset 0 -2px 0 rgba(0, 0, 0, .15);
+    --wd-brd-radius: 0px;
+}
+
+:root {
+    --wd-container-w: 1222px;
+}
+
+@media (min-width: 1239px) {
+    .platform-Windows .wd-section-stretch>.elementor-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (min-width: 1222px) {
+    html:not(.platform-Windows) .wd-section-stretch>.elementor-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+div.wd-popup.popup-quick-view {
+    max-width: 920px;
+}
+
+.woodmart-woocommerce-layered-nav .wd-scroll-content {
+    max-height: 223px;
+}
+
+:is(.color-scheme-light,
+.whb-color-light) .wd-nav[class*="wd-style-"] {
+    --nav-color: #000000;
+    --nav-color-hover: #e62f5b;
+    --nav-color-active: #e62f5b;
+}
+
+.whb-color-light .wd-tools-element {
+    --wd-header-el-color: #000000;
+    --wd-header-el-color-hover: #000000;
+}
+
+.wd-sub-menu {
+    --sub-menu-color: #000000;
+}
+
+.testimonial-avatar img {
+    min-width: 130px;
+}
+
+@media only screen and (max-width: 600px) {
+    .gt_float_switcher {
+        display: none !important;
+    }
+}
