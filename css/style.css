@@ -2286,3 +2286,283 @@ p { margin-bottom: 1rem; }
   padding-top: 100px;
 }
 
+/* ---------- TEAM SECTION ---------- */
+.team-section {
+  background: linear-gradient(135deg, #3d000d 0%, #1e0006 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+  text-align: center;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.team-section .section-header h2 {
+  color: #fff;
+}
+
+.team-section .section-header .subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.team-group-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto 30px;
+  overflow: hidden;
+  height: 480px; /* waist-up clipping height */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.team-group-image {
+  width: 100%;
+  max-width: 850px;
+  height: auto;
+  display: block;
+}
+
+/* Gradient overlay to fade out the waist at the bottom */
+.team-group-container::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px; /* size of the fade */
+  background: linear-gradient(to bottom, rgba(61, 0, 13, 0) 0%, #1a0005 100%);
+  pointer-events: none;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 30px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.team-member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  color: #fff;
+  transition: transform 0.3s var(--ease);
+}
+
+.team-member-card:hover {
+  transform: translateY(-5px);
+}
+
+.member-name-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.member-name-row .name-icon {
+  font-size: 18px;
+  color: var(--gold-light);
+  background: rgba(212, 175, 55, 0.1);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+
+.team-member-card:hover .member-name-row .name-icon {
+  border-color: var(--gold-light);
+  background: rgba(212, 175, 55, 0.2);
+}
+
+.member-name-row h3 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-primary);
+}
+
+.member-role-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px dashed rgba(212, 175, 55, 0.15);
+  width: 100%;
+  padding-top: 10px;
+}
+
+.member-role-row .role-icon {
+  font-size: 15px;
+  color: var(--gold-light);
+  opacity: 0.85;
+}
+
+.member-role {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* ---------- VENUES PAGE ---------- */
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.venue-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.venue-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(128, 0, 32, 0.1);
+  border-color: var(--gold);
+}
+
+.venue-image {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.venue-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.venue-card:hover .venue-image img {
+  transform: scale(1.08);
+}
+
+.venue-type-tag {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: var(--maroon);
+  color: var(--gold-light);
+  padding: 6px 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid var(--gold);
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+
+.venue-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.venue-body h3 {
+  font-size: 20px;
+  color: var(--maroon);
+  margin: 0 0 12px;
+  font-family: var(--font-primary);
+  font-weight: 600;
+}
+
+.venue-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  color: #666;
+}
+
+.venue-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.venue-meta i {
+  color: var(--gold);
+}
+
+.venue-body p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 20px;
+  flex-grow: 1;
+}
+
+.venue-footer {
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 15px;
+  margin-top: auto;
+}
+
+.venue-footer .btn {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+/* Responsiveness for team and venues */
+@media (max-width: 1199px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 991px) {
+  .venues-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .team-group-container {
+    height: 380px;
+  }
+}
+
+@media (max-width: 768px) {
+  .venues-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .team-group-container {
+    height: 280px;
+  }
+}
+
+
