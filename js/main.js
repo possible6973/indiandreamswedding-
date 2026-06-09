@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    Indians Dream Wedding â€” RAJWADI THEME JS
    Animations, Carousels & Interactions
    ============================================ */
@@ -196,28 +196,97 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // ---------- GALLERY FILTER ----------
+  // ---------- GALLERY PAGINATION & FILTER ----------
   const filterButtons = document.querySelectorAll('.gallery-filters button');
   const galleryItems = document.querySelectorAll('.gallery-item');
+  const galleryGrid = document.querySelector('.gallery-grid');
 
-  if (filterButtons.length > 0 && galleryItems.length > 0) {
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+  if (galleryGrid && galleryItems.length > 0) {
+    // 1. Create Load More Button Dynamically
+    const loadMoreBtn = document.createElement('button');
+    loadMoreBtn.className = 'btn btn-primary load-more-btn';
+    // Style directly to match center alignment and theme styling
+    loadMoreBtn.style.display = 'none';
+    loadMoreBtn.style.margin = '40px auto 0';
+    loadMoreBtn.style.gap = '10px';
+    loadMoreBtn.innerHTML = 'Load More <i class="fa-solid fa-chevron-down"></i>';
 
-        const filter = btn.dataset.filter;
+    // Insert button immediately after the gallery grid
+    galleryGrid.parentNode.insertBefore(loadMoreBtn, galleryGrid.nextSibling);
 
-        galleryItems.forEach(item => {
-          const category = item.dataset.category;
-          if (filter === 'all' || category === filter) {
+    const ITEMS_PER_PAGE = 12;
+    let currentFilter = 'all';
+    let visibleCount = ITEMS_PER_PAGE;
+
+    function updateGallery() {
+      let shownCount = 0;
+      let totalMatching = 0;
+
+      galleryItems.forEach(item => {
+        const category = item.dataset.category;
+        const matchesFilter = (currentFilter === 'all' || category === currentFilter);
+
+        if (matchesFilter) {
+          totalMatching++;
+          if (shownCount < visibleCount) {
             item.style.display = '';
-            item.style.animation = 'scaleIn 0.4s ease-out';
+            // Trigger animation if the item is newly showing
+            if (item.classList.contains('hidden-item')) {
+              item.classList.remove('hidden-item');
+              item.style.animation = 'scaleIn 0.4s var(--ease) both';
+            }
+            shownCount++;
           } else {
             item.style.display = 'none';
+            item.classList.add('hidden-item');
           }
+        } else {
+          item.style.display = 'none';
+          item.classList.add('hidden-item');
+        }
+      });
+
+      // Show the button only if there are more matching items to reveal
+      if (totalMatching > visibleCount) {
+        loadMoreBtn.style.display = 'inline-flex';
+      } else {
+        loadMoreBtn.style.display = 'none';
+      }
+    }
+
+    // Initialize state
+    galleryItems.forEach(item => item.classList.add('hidden-item'));
+    updateGallery();
+
+    // Filter Button Click Handler
+    if (filterButtons.length > 0) {
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          currentFilter = btn.dataset.filter;
+          visibleCount = ITEMS_PER_PAGE; // Reset to page 1 count
+
+          galleryItems.forEach(item => item.classList.add('hidden-item'));
+          updateGallery();
         });
       });
+    }
+
+    // Load More Button Click Handler
+    loadMoreBtn.addEventListener('click', () => {
+      // Simulate loading state with spinner icon for a premium look
+      const icon = loadMoreBtn.querySelector('i');
+      icon.className = 'fa-solid fa-spinner fa-spin';
+      loadMoreBtn.disabled = true;
+
+      setTimeout(() => {
+        visibleCount += ITEMS_PER_PAGE;
+        updateGallery();
+        icon.className = 'fa-solid fa-chevron-down';
+        loadMoreBtn.disabled = false;
+      }, 500); // 500ms delay for premium feel
     });
   }
 
