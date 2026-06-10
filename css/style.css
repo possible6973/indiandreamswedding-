@@ -3144,152 +3144,147 @@ p { margin-bottom: 1rem; }
 }
 
 /* =====================================================
-   PREMIUM TEAM MEMBER CARDS — Individual Photo + Name
+   TEAM PHOTO BLOCK — Group Photo + Nameplate Row
    ===================================================== */
 
-.premium-team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  margin-top: 60px;
-}
-
-/* Card container */
-.ptm-card {
-  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
-  border: 1px solid rgba(212, 175, 55, 0.22);
-  border-radius: 16px;
+/* Outer wrapper — constrains width, centres everything */
+.team-photo-block {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-  cursor: pointer;
+  box-shadow:
+    0 0 0 1px rgba(212, 175, 55, 0.25),
+    0 30px 70px rgba(0, 0, 0, 0.45);
 }
 
-.ptm-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 24px 60px rgba(74, 0, 16, 0.4), 0 0 0 1px rgba(212,175,55,0.45);
-  border-color: rgba(212, 175, 55, 0.55);
-}
-
-/* Photo area */
-.ptm-photo {
-  position: relative;
+/* Group photo container */
+.team-group-photo {
   width: 100%;
-  height: 340px;
-  overflow: hidden;
+  background: linear-gradient(180deg, rgba(74,0,16,0.15) 0%, rgba(74,0,16,0.4) 100%);
+  line-height: 0;
 }
 
-.ptm-photo img {
+.team-group-photo img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  height: auto;
   display: block;
-  transition: transform 0.5s ease;
+  object-fit: contain;
 }
 
-.ptm-card:hover .ptm-photo img {
-  transform: scale(1.06);
-}
-
-/* Hover overlay with icon */
-.ptm-photo-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(74,0,16,0.75) 0%, transparent 60%);
+/* Nameplate row — attaches directly under photo */
+.team-nameplate-row {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 16px;
-  opacity: 0;
-  transition: opacity 0.35s ease;
+  align-items: stretch;
+  background: linear-gradient(135deg, rgba(40, 0, 10, 0.95) 0%, rgba(20, 0, 6, 0.98) 100%);
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, transparent, var(--gold), transparent) 1;
 }
 
-.ptm-card:hover .ptm-photo-overlay {
-  opacity: 1;
-}
-
-.ptm-photo-overlay i {
-  font-size: 20px;
-  color: var(--gold-light);
-  background: rgba(212, 175, 55, 0.2);
-  border: 1.5px solid var(--gold);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+/* Each person's slot */
+.tnp-slot {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-
-/* Gold accent line at bottom of photo */
-.ptm-photo::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  z-index: 2;
-}
-
-/* Name + Role info block */
-.ptm-info {
-  padding: 20px 22px 22px;
+  padding: 20px 10px 18px;
+  gap: 5px;
   text-align: center;
-  background: rgba(0, 0, 0, 0.2);
-  border-top: 1px solid rgba(212, 175, 55, 0.15);
+  border-right: 1px solid rgba(212, 175, 55, 0.15);
+  transition: background 0.3s ease;
+  cursor: default;
 }
 
-.ptm-info h3 {
+.tnp-slot:last-child {
+  border-right: none;
+}
+
+.tnp-slot:hover {
+  background: rgba(212, 175, 55, 0.07);
+}
+
+/* Gold dot above name */
+.tnp-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+/* Name */
+.tnp-slot strong {
   font-family: var(--font-heading);
-  font-size: 1.15rem;
+  font-size: clamp(0.78rem, 1.1vw, 1rem);
   font-weight: 700;
   color: var(--gold-light);
-  margin: 0 0 6px;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   line-height: 1.2;
 }
 
-.ptm-info span {
+/* Role */
+.tnp-slot span {
   font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(0.6rem, 0.8vw, 0.72rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.8px;
+  line-height: 1.3;
 }
 
-/* Responsive — tablet: 2 columns */
-@media (max-width: 991px) {
-  .premium-team-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 50px;
+/* Responsive — tablet: wrap into 3x2 grid */
+@media (max-width: 768px) {
+  .team-nameplate-row {
+    flex-wrap: wrap;
+    border-image: none;
+    border-top: 2px solid rgba(212, 175, 55, 0.3);
   }
-  .ptm-photo {
-    height: 300px;
+  .tnp-slot {
+    flex: 0 0 33.333%;
+    border-right: 1px solid rgba(212, 175, 55, 0.15);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+    padding: 16px 8px 14px;
+  }
+  .tnp-slot:nth-child(3),
+  .tnp-slot:nth-child(6) {
+    border-right: none;
+  }
+  .tnp-slot:nth-child(4),
+  .tnp-slot:nth-child(5),
+  .tnp-slot:nth-child(6) {
+    border-bottom: none;
   }
 }
 
-/* Responsive — mobile: 2 columns */
-@media (max-width: 576px) {
-  .premium-team-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 36px;
+/* Responsive — mobile: 2x3 grid */
+@media (max-width: 480px) {
+  .team-photo-block {
+    border-radius: 14px;
   }
-  .ptm-photo {
-    height: 220px;
+  .tnp-slot {
+    flex: 0 0 50%;
+    padding: 14px 6px 12px;
   }
-  .ptm-info {
-    padding: 14px 14px 16px;
+  .tnp-slot:nth-child(3) {
+    border-right: 1px solid rgba(212, 175, 55, 0.15);
   }
-  .ptm-info h3 {
-    font-size: 0.95rem;
+  .tnp-slot:nth-child(2),
+  .tnp-slot:nth-child(4),
+  .tnp-slot:nth-child(6) {
+    border-right: none;
   }
-  .ptm-info span {
-    font-size: 0.68rem;
-    letter-spacing: 1px;
+  .tnp-slot:nth-child(5),
+  .tnp-slot:nth-child(6) {
+    border-bottom: none;
+  }
+  .tnp-slot strong {
+    font-size: 0.8rem;
+  }
+  .tnp-slot span {
+    font-size: 0.6rem;
   }
 }
