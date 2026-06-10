@@ -2420,13 +2420,16 @@ p { margin-bottom: 1rem; }
 /* 4. Team Group Image Section with Fade */
 .luxury-team-image-container {
   position: relative;
-  max-width: 1200px;
+  max-width: 1100px;
   width: 95%;
-  margin: 0 auto 60px;
+  margin: 0 auto 0;    /* no bottom gap — names strip attaches below */
   display: flex;
   justify-content: center;
   align-items: flex-start;
   z-index: 2;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .luxury-team-image {
@@ -2435,10 +2438,8 @@ p { margin-bottom: 1rem; }
   height: auto;
   display: block;
   z-index: 2;
-  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7));
-  /* Fade applied directly to the image itself to scale with image dimensions */
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 75%);
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 35%, rgba(0, 0, 0, 0) 75%);
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+  /* No mask-image — image shows fully, names strip continues below */
 }
 
 .gold-glow-behind {
@@ -3040,156 +3041,104 @@ p { margin-bottom: 1rem; }
 }
 
 /* =====================================================
-   TEAM PORTRAIT GRID — Clean Modern Layout
+   TEAM NAMES STRIP — Below Group Photo
    ===================================================== */
 
-.team-portrait-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px 30px;
-  margin-top: 60px;
-  padding: 0 10px;
+/* Horizontal strip: all 6 names in one row */
+.team-names-strip {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-top: 0;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
 }
 
-/* Individual portrait card */
-.team-portrait-card {
+/* Each person block */
+.team-name-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  gap: 0;
+  justify-content: center;
+  padding: 22px 24px;
+  gap: 5px;
+  flex: 1;
+  min-width: 130px;
+  transition: background 0.3s ease;
 }
 
-/* Photo wrapper — circular, gold ring */
-.portrait-img-wrap {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 4px solid var(--gold);
-  box-shadow: 0 0 0 6px rgba(212,175,55,0.15), 0 12px 35px rgba(74,0,16,0.2);
-  background: var(--maroon-dark);
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
+.team-name-item:hover {
+  background: rgba(212, 175, 55, 0.08);
+}
+
+/* Name — gold, bold */
+.tni-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Role — muted, uppercase small */
+.tni-role {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* Vertical gold divider between members */
+.team-name-divider {
+  width: 1px;
+  background: rgba(212, 175, 55, 0.3);
+  align-self: stretch;
   flex-shrink: 0;
 }
 
-.team-portrait-card:hover .portrait-img-wrap {
-  transform: translateY(-6px);
-  box-shadow: 0 0 0 8px rgba(212,175,55,0.3), 0 18px 45px rgba(74,0,16,0.3);
-}
-
-/* Photo fills the circle */
-.portrait-img-wrap > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  transition: transform 0.45s ease, filter 0.35s ease;
-}
-
-.team-portrait-card:hover .portrait-img-wrap > img {
-  transform: scale(1.07);
-  filter: brightness(0.6);
-}
-
-/* Hover overlay with Instagram */
-.portrait-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(74, 0, 16, 0.55);
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.team-portrait-card:hover .portrait-overlay {
-  opacity: 1;
-}
-
-.portrait-overlay a {
-  color: var(--gold-light);
-  font-size: 22px;
-  background: rgba(255,255,255,0.12);
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1.5px solid var(--gold);
-  transition: background 0.25s ease, transform 0.25s ease;
-}
-
-.portrait-overlay a:hover {
-  background: var(--gold);
-  color: var(--maroon);
-  transform: scale(1.1);
-}
-
-/* Name + designation below photo */
-.portrait-info {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.portrait-info h3 {
-  font-family: var(--font-heading);
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--gold-light);
-  margin: 0;
-  letter-spacing: 0.3px;
-  line-height: 1.25;
-}
-
-.portrait-info span {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: rgba(255,255,255,0.65);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-}
-
-/* Responsive — tablet: 2 columns, center last odd */
+/* Responsive — tablet: 3 per row */
 @media (max-width: 991px) {
-  .team-portrait-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px 24px;
-    margin-top: 50px;
+  .team-names-strip {
+    border-radius: 12px;
+    margin-top: 20px;
   }
-  .portrait-img-wrap {
-    width: 170px;
-    height: 170px;
+  .team-name-item {
+    flex: 0 0 calc(33.333% - 1px);
+    padding: 18px 16px;
+  }
+  .team-name-divider:nth-child(6),
+  .team-name-divider:nth-child(8) {
+    display: none;
   }
 }
 
-/* Responsive — mobile: 2 columns smaller */
+/* Responsive — mobile: 2 per row */
 @media (max-width: 576px) {
-  .team-portrait-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px 16px;
-    margin-top: 40px;
-    padding: 0;
+  .team-names-strip {
+    border-radius: 10px;
+    margin-top: 16px;
   }
-  .portrait-img-wrap {
-    width: 130px;
-    height: 130px;
-    border-width: 3px;
+  .team-name-item {
+    flex: 0 0 calc(50% - 1px);
+    padding: 14px 12px;
   }
-  .portrait-info h3 {
-    font-size: 1rem;
+  .tni-name {
+    font-size: 0.88rem;
+    white-space: normal;
+    text-align: center;
   }
-  .portrait-info span {
-    font-size: 0.75rem;
-    letter-spacing: 0.8px;
+  .tni-role {
+    font-size: 0.65rem;
+    white-space: normal;
+    text-align: center;
   }
 }
