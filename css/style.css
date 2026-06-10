@@ -3393,3 +3393,144 @@ p { margin-bottom: 1rem; }
 .tm-person::before {
   display: none !important;
 }
+
+/* ===================================================
+   TM REDESIGN v3 — Reference image match
+   =================================================== */
+
+/* Wrapper: no overflow hidden so fade blends with bg */
+.tm-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Gold radial glow behind the team photo */
+.tm-gold-glow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 65%;
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.28) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
+}
+
+/* Photo: fade bottom half into bg */
+.tm-photo {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  line-height: 0;
+}
+
+.tm-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 80%);
+  mask-image: linear-gradient(to bottom, black 0%, black 45%, transparent 80%);
+}
+
+/* Namebar: seamless below photo */
+.tm-namebar {
+  width: 100%;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: transparent;
+  padding: 10px 0 30px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Each person column */
+.tm-person {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 6px;
+  border-right: 1px solid rgba(212,175,55,0.15);
+}
+.tm-person:last-child { border-right: none; }
+.tm-person:hover .tm-icon-ring { background: rgba(212,175,55,0.18); transform: scale(1.08); }
+
+/* Circular gold ring icon */
+.tm-icon-ring {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid #d4af37;
+  background: rgba(212,175,55,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 0 12px rgba(212,175,55,0.2);
+  flex-shrink: 0;
+}
+.tm-icon-ring i {
+  font-size: 1rem;
+  color: #d4af37;
+}
+
+/* Name — gold, uppercase, bold */
+.tm-name {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(0.7rem, 0.95vw, 0.88rem);
+  font-weight: 700;
+  color: #e8c96a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.25;
+  text-align: center;
+}
+
+/* Role — muted, small */
+.tm-role {
+  display: block;
+  font-family: var(--font-body);
+  font-size: clamp(0.55rem, 0.65vw, 0.62rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Remove old ::before dot */
+.tm-person::before { display: none !important; }
+
+/* Responsive tablet */
+@media (max-width: 768px) {
+  .tm-namebar { flex-wrap: wrap; padding: 10px 0 20px; }
+  .tm-person {
+    flex: 0 0 33.333%;
+    border-right: 1px solid rgba(212,175,55,0.15);
+    border-bottom: 1px solid rgba(212,175,55,0.1);
+    padding: 12px 4px;
+  }
+  .tm-person:nth-child(3n) { border-right: none; }
+  .tm-person:nth-child(4), .tm-person:nth-child(5), .tm-person:nth-child(6) { border-bottom: none; }
+  .tm-icon-ring { width: 44px; height: 44px; }
+}
+
+/* Responsive mobile */
+@media (max-width: 460px) {
+  .tm-person { flex: 0 0 50%; padding: 10px 2px; }
+  .tm-person:nth-child(2n) { border-right: none; }
+  .tm-person:nth-child(3n) { border-right: 1px solid rgba(212,175,55,0.15); }
+  .tm-icon-ring { width: 38px; height: 38px; }
+  .tm-icon-ring i { font-size: 0.85rem; }
+  .tm-name { font-size: 0.65rem; }
+  .tm-role { font-size: 0.52rem; }
+}
