@@ -97,103 +97,89 @@
     <div class="team-palace-bg"></div>
     <div class="container">
 
-      <!-- Header -->
-      <div class="tbs-header">
+      <!-- Heading -->
+      <div class="section-header" style="margin-bottom:50px;">
         <span class="decorative-text" style="color:var(--gold-light);">Hamara Parivaar</span>
         <h2 class="team-heading-luxury">Meet Our Team</h2>
-        <p class="tbs-subline">The passionate people behind every unforgettable celebration</p>
       </div>
 
-      <!-- Bios wrapper -->
-      <div class="tbs-wrapper" role="main">
+      <!-- EXACT same structure as reference -->
+      <div class="bios" id="teamBios" role="main">
 
-        <!-- Left arrow -->
-        <button class="tbs-arrow tbs-arrow-left" id="tbsLeft" aria-label="Scroll left">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
+        <div class="h5">Meet the Team</div>
 
-        <!-- Horizontal list -->
-        <ul class="tbs-list" id="tbsList">
+        <ul class="team-bios fade" id="teamBiosList">
 
-          <li class="tbs-card">
-            <div class="tbs-photo-wrap">
-              <img class="tbs-photo" src="services-images/founder.png" alt="Umang Rathod" loading="lazy">
-              <div class="tbs-photo-shimmer"></div>
-            </div>
-            <div class="tbs-info">
-              <div class="tbs-name">Umang Rathod</div>
-              <div class="tbs-role">Founder &amp; CEO</div>
-            </div>
+          <li>
+            <img decoding="async" class="team-image"
+                 src="services-images/founder.png"
+                 alt="Umang Rathod"
+                 data-title="Umang Rathod"
+                 data-subtitle="Founder &amp; CEO">
+            <div class="h3 team-title">Umang Rathod</div>
+            <div class="h6">Founder &amp; CEO</div>
           </li>
 
-          <li class="tbs-card">
-            <div class="tbs-photo-wrap">
-              <img class="tbs-photo" src="services-images/event_manager.png" alt="Yash Gohil" loading="lazy">
-              <div class="tbs-photo-shimmer"></div>
-            </div>
-            <div class="tbs-info">
-              <div class="tbs-name">Yash Gohil</div>
-              <div class="tbs-role">Event Manager</div>
-            </div>
+          <li>
+            <img decoding="async" class="team-image"
+                 src="services-images/event_manager.png"
+                 alt="Yash Gohil"
+                 data-title="Yash Gohil"
+                 data-subtitle="Event Manager">
+            <div class="h3 team-title">Yash Gohil</div>
+            <div class="h6">Event Manager</div>
           </li>
 
-          <li class="tbs-card">
-            <div class="tbs-photo-wrap">
-              <img class="tbs-photo" src="services-images/designer.png" alt="Sonu Maurya" loading="lazy">
-              <div class="tbs-photo-shimmer"></div>
-            </div>
-            <div class="tbs-info">
-              <div class="tbs-name">Sonu Maurya</div>
-              <div class="tbs-role">Mandap Decorator</div>
-            </div>
+          <li>
+            <img decoding="async" class="team-image"
+                 src="services-images/designer.png"
+                 alt="Sonu Maurya"
+                 data-title="Sonu Maurya"
+                 data-subtitle="Mandap Decorator">
+            <div class="h3 team-title">Sonu Maurya</div>
+            <div class="h6">Mandap Decorator</div>
           </li>
 
-          <li class="tbs-card">
-            <div class="tbs-photo-wrap">
-              <img class="tbs-photo" src="services-images/dj.png" alt="Rahul Maurya" loading="lazy">
-              <div class="tbs-photo-shimmer"></div>
-            </div>
-            <div class="tbs-info">
-              <div class="tbs-name">Rahul Maurya</div>
-              <div class="tbs-role">DJ &amp; LED Screen</div>
-            </div>
+          <li>
+            <img decoding="async" class="team-image"
+                 src="services-images/dj.png"
+                 alt="Rahul Maurya"
+                 data-title="Rahul Maurya"
+                 data-subtitle="DJ &amp; LED Screen">
+            <div class="h3 team-title">Rahul Maurya</div>
+            <div class="h6">DJ &amp; LED Screen</div>
           </li>
 
-          <li class="tbs-card">
-            <div class="tbs-photo-wrap">
-              <img class="tbs-photo" src="services-images/florist.png" alt="Ravi Maurya" loading="lazy">
-              <div class="tbs-photo-shimmer"></div>
-            </div>
-            <div class="tbs-info">
-              <div class="tbs-name">Ravi Maurya</div>
-              <div class="tbs-role">Flower Decorator</div>
-            </div>
+          <li>
+            <img decoding="async" class="team-image"
+                 src="services-images/florist.png"
+                 alt="Ravi Maurya"
+                 data-title="Ravi Maurya"
+                 data-subtitle="Flower Decorator">
+            <div class="h3 team-title">Ravi Maurya</div>
+            <div class="h6">Flower Decorator</div>
           </li>
 
-          <li class="tbs-card">
-            <div class="tbs-photo-wrap">
-              <img class="tbs-photo" src="services-images/caterer.png" alt="Parmeshwar Rajput" loading="lazy">
-              <div class="tbs-photo-shimmer"></div>
-            </div>
-            <div class="tbs-info">
-              <div class="tbs-name">Parmeshwar Rajput</div>
-              <div class="tbs-role">Caterer</div>
-            </div>
+          <li>
+            <img decoding="async" class="team-image"
+                 src="services-images/caterer.png"
+                 alt="Parmeshwar Rajput"
+                 data-title="Parmeshwar Rajput"
+                 data-subtitle="Caterer">
+            <div class="h3 team-title">Parmeshwar Rajput</div>
+            <div class="h6">Caterer</div>
           </li>
 
         </ul>
 
-        <!-- Right arrow -->
-        <button class="tbs-arrow tbs-arrow-right" id="tbsRight" aria-label="Scroll right">
+        <button class="nav-arrow-right" id="teamScrollRight" aria-label="Scroll Right">
           <i class="fa-solid fa-chevron-right"></i>
         </button>
 
-      </div><!-- /tbs-wrapper -->
+      </div><!-- /bios -->
 
     </div>
   </section>
-
-
 
   <!-- ===== HOW IT WORKS ===== -->
   <section class="steps-section animate-on-scroll">

@@ -391,3 +391,22 @@ document.addEventListener('DOMContentLoaded', () => {
   list.addEventListener('scroll', updateArrows, { passive: true });
   updateArrows(); // init state
 })();
+
+/* Team bios scroll — matches reference button/list IDs */
+(function () {
+  var list = document.getElementById('teamBiosList');
+  var btn  = document.getElementById('teamScrollRight');
+  if (!list || !btn) return;
+  btn.addEventListener('click', function () {
+    list.scrollBy({ left: 260, behavior: 'smooth' });
+  });
+  /* Loop back to start when end reached */
+  list.addEventListener('scroll', function () {
+    var atEnd = list.scrollLeft >= list.scrollWidth - list.clientWidth - 8;
+    if (atEnd) {
+      setTimeout(function () {
+        list.scrollTo({ left: 0, behavior: 'smooth' });
+      }, 600);
+    }
+  }, { passive: true });
+})();
