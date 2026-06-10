@@ -3039,3 +3039,157 @@ p { margin-bottom: 1rem; }
   }
 }
 
+/* =====================================================
+   TEAM PORTRAIT GRID — Clean Modern Layout
+   ===================================================== */
+
+.team-portrait-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 30px;
+  margin-top: 60px;
+  padding: 0 10px;
+}
+
+/* Individual portrait card */
+.team-portrait-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+}
+
+/* Photo wrapper — circular, gold ring */
+.portrait-img-wrap {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--gold);
+  box-shadow: 0 0 0 6px rgba(212,175,55,0.15), 0 12px 35px rgba(74,0,16,0.2);
+  background: var(--maroon-dark);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  flex-shrink: 0;
+}
+
+.team-portrait-card:hover .portrait-img-wrap {
+  transform: translateY(-6px);
+  box-shadow: 0 0 0 8px rgba(212,175,55,0.3), 0 18px 45px rgba(74,0,16,0.3);
+}
+
+/* Photo fills the circle */
+.portrait-img-wrap > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.45s ease, filter 0.35s ease;
+}
+
+.team-portrait-card:hover .portrait-img-wrap > img {
+  transform: scale(1.07);
+  filter: brightness(0.6);
+}
+
+/* Hover overlay with Instagram */
+.portrait-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(74, 0, 16, 0.55);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.team-portrait-card:hover .portrait-overlay {
+  opacity: 1;
+}
+
+.portrait-overlay a {
+  color: var(--gold-light);
+  font-size: 22px;
+  background: rgba(255,255,255,0.12);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--gold);
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.portrait-overlay a:hover {
+  background: var(--gold);
+  color: var(--maroon);
+  transform: scale(1.1);
+}
+
+/* Name + designation below photo */
+.portrait-info {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.portrait-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin: 0;
+  letter-spacing: 0.3px;
+  line-height: 1.25;
+}
+
+.portrait-info span {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* Responsive — tablet: 2 columns, center last odd */
+@media (max-width: 991px) {
+  .team-portrait-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+    margin-top: 50px;
+  }
+  .portrait-img-wrap {
+    width: 170px;
+    height: 170px;
+  }
+}
+
+/* Responsive — mobile: 2 columns smaller */
+@media (max-width: 576px) {
+  .team-portrait-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 16px;
+    margin-top: 40px;
+    padding: 0;
+  }
+  .portrait-img-wrap {
+    width: 130px;
+    height: 130px;
+    border-width: 3px;
+  }
+  .portrait-info h3 {
+    font-size: 1rem;
+  }
+  .portrait-info span {
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+  }
+}
