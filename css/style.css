@@ -3373,3 +3373,23 @@ p { margin-bottom: 1rem; }
   .tm-name { font-size: 0.75rem; }
   .tm-role { font-size: 0.55rem; }
 }
+
+/* TM icon style */
+.tm-icon {
+  font-size: 1.1rem;
+  color: #d4af37;
+  margin-bottom: 8px;
+  display: block;
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.tm-person:hover .tm-icon {
+  transform: scale(1.2);
+  color: #f0d060;
+}
+
+/* Remove the CSS ::before dot since we now use real icons */
+.tm-person::before {
+  display: none !important;
+}
