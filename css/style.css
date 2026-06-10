@@ -2422,12 +2422,12 @@ p { margin-bottom: 1rem; }
   position: relative;
   max-width: 1100px;
   width: 95%;
-  margin: 0 auto 0;    /* no bottom gap — names strip attaches below */
+  margin: 0 auto 50px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   z-index: 2;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.12);
 }
@@ -3140,5 +3140,156 @@ p { margin-bottom: 1rem; }
     font-size: 0.65rem;
     white-space: normal;
     text-align: center;
+  }
+}
+
+/* =====================================================
+   PREMIUM TEAM MEMBER CARDS — Individual Photo + Name
+   ===================================================== */
+
+.premium-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 60px;
+}
+
+/* Card container */
+.ptm-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  cursor: pointer;
+}
+
+.ptm-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 60px rgba(74, 0, 16, 0.4), 0 0 0 1px rgba(212,175,55,0.45);
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+/* Photo area */
+.ptm-photo {
+  position: relative;
+  width: 100%;
+  height: 340px;
+  overflow: hidden;
+}
+
+.ptm-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.ptm-card:hover .ptm-photo img {
+  transform: scale(1.06);
+}
+
+/* Hover overlay with icon */
+.ptm-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(74,0,16,0.75) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.ptm-card:hover .ptm-photo-overlay {
+  opacity: 1;
+}
+
+.ptm-photo-overlay i {
+  font-size: 20px;
+  color: var(--gold-light);
+  background: rgba(212, 175, 55, 0.2);
+  border: 1.5px solid var(--gold);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gold accent line at bottom of photo */
+.ptm-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  z-index: 2;
+}
+
+/* Name + Role info block */
+.ptm-info {
+  padding: 20px 22px 22px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.ptm-info h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin: 0 0 6px;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+
+.ptm-info span {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Responsive — tablet: 2 columns */
+@media (max-width: 991px) {
+  .premium-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 50px;
+  }
+  .ptm-photo {
+    height: 300px;
+  }
+}
+
+/* Responsive — mobile: 2 columns */
+@media (max-width: 576px) {
+  .premium-team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 36px;
+  }
+  .ptm-photo {
+    height: 220px;
+  }
+  .ptm-info {
+    padding: 14px 14px 16px;
+  }
+  .ptm-info h3 {
+    font-size: 0.95rem;
+  }
+  .ptm-info span {
+    font-size: 0.68rem;
+    letter-spacing: 1px;
   }
 }
