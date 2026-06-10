@@ -2310,7 +2310,8 @@ p { margin-bottom: 1rem; }
   max-width: 900px;
   margin: 0 auto 30px;
   overflow: hidden;
-  height: 480px; /* waist-up clipping height */
+  width: 100%;
+  aspect-ratio: 16 / 5.5; /* Always crop responsively at waistline */
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -2321,18 +2322,9 @@ p { margin-bottom: 1rem; }
   max-width: 850px;
   height: auto;
   display: block;
-}
-
-/* Gradient overlay to fade out the waist at the bottom */
-.team-group-container::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 150px; /* size of the fade */
-  background: linear-gradient(to bottom, rgba(61, 0, 13, 0) 0%, #1a0005 100%);
-  pointer-events: none;
+  /* Premium transparent fade-out mask for the bottom 60% of the image */
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
 }
 
 .team-grid {
@@ -2543,9 +2535,7 @@ p { margin-bottom: 1rem; }
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  .team-group-container {
-    height: 380px;
-  }
+  /* team-group-container height removed for responsive aspect-ratio cropping */
 }
 
 @media (max-width: 768px) {
@@ -2560,9 +2550,7 @@ p { margin-bottom: 1rem; }
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-  .team-group-container {
-    height: 280px;
-  }
+  /* team-group-container height removed for responsive aspect-ratio cropping */
 }
 
 
