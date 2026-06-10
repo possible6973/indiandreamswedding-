@@ -366,3 +366,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+
+/* ── Team Bio Scroll (tbs) ── */
+(function () {
+  var list  = document.getElementById('tbsList');
+  var btnL  = document.getElementById('tbsLeft');
+  var btnR  = document.getElementById('tbsRight');
+  if (!list || !btnL || !btnR) return;
+
+  var STEP = 280; // px per click
+
+  function updateArrows() {
+    btnL.classList.toggle('hidden', list.scrollLeft <= 4);
+    btnR.classList.toggle('hidden', list.scrollLeft >= list.scrollWidth - list.clientWidth - 4);
+  }
+
+  btnL.addEventListener('click', function () {
+    list.scrollBy({ left: -STEP, behavior: 'smooth' });
+  });
+  btnR.addEventListener('click', function () {
+    list.scrollBy({ left: STEP, behavior: 'smooth' });
+  });
+
+  list.addEventListener('scroll', updateArrows, { passive: true });
+  updateArrows(); // init state
+})();

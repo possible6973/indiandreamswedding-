@@ -93,71 +93,106 @@
   </section>
 
   <!-- ===== TEAM SECTION ===== -->
-  <section class="team-section animate-on-scroll">
+  <section class="team-section" id="our-team">
     <div class="team-palace-bg"></div>
     <div class="container">
 
-      <!-- Section Header -->
-      <div class="section-header" style="margin-bottom: 40px;">
-        <span class="decorative-text" style="color: var(--gold-light);">Hamara Parivaar</span>
+      <!-- Header -->
+      <div class="tbs-header">
+        <span class="decorative-text" style="color:var(--gold-light);">Hamara Parivaar</span>
         <h2 class="team-heading-luxury">Meet Our Team</h2>
+        <p class="tbs-subline">The passionate people behind every unforgettable celebration</p>
       </div>
 
-      <!-- Team wrapper -->
-      <div class="tm-wrapper">
+      <!-- Bios wrapper -->
+      <div class="tbs-wrapper" role="main">
 
-        <!-- Gold glow behind photo -->
-        <div class="tm-gold-glow"></div>
+        <!-- Left arrow -->
+        <button class="tbs-arrow tbs-arrow-left" id="tbsLeft" aria-label="Scroll left">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
 
-        <!-- Group Photo with bottom fade -->
-        <div class="tm-photo">
-          <img src="services-images/team-transparent.png" alt="Indians Dream Wedding Team" loading="lazy">
-        </div>
+        <!-- Horizontal list -->
+        <ul class="tbs-list" id="tbsList">
 
-        <!-- 6-person name bar -->
-        <div class="tm-namebar" style="display:flex; flex-direction:row; width:100%;">
+          <li class="tbs-card">
+            <div class="tbs-photo-wrap">
+              <img class="tbs-photo" src="services-images/founder.png" alt="Umang Rathod" loading="lazy">
+              <div class="tbs-photo-shimmer"></div>
+            </div>
+            <div class="tbs-info">
+              <div class="tbs-name">Umang Rathod</div>
+              <div class="tbs-role">Founder &amp; CEO</div>
+            </div>
+          </li>
 
-          <div class="tm-person">
-            <div class="tm-icon-ring"><i class="fa-solid fa-crown"></i></div>
-            <span class="tm-name">Umang Rathod</span>
-            <span class="tm-role">Founder &amp; CEO</span>
-          </div>
+          <li class="tbs-card">
+            <div class="tbs-photo-wrap">
+              <img class="tbs-photo" src="services-images/event_manager.png" alt="Yash Gohil" loading="lazy">
+              <div class="tbs-photo-shimmer"></div>
+            </div>
+            <div class="tbs-info">
+              <div class="tbs-name">Yash Gohil</div>
+              <div class="tbs-role">Event Manager</div>
+            </div>
+          </li>
 
-          <div class="tm-person">
-            <div class="tm-icon-ring"><i class="fa-solid fa-calendar-check"></i></div>
-            <span class="tm-name">Yash Gohil</span>
-            <span class="tm-role">Event Manager</span>
-          </div>
+          <li class="tbs-card">
+            <div class="tbs-photo-wrap">
+              <img class="tbs-photo" src="services-images/designer.png" alt="Sonu Maurya" loading="lazy">
+              <div class="tbs-photo-shimmer"></div>
+            </div>
+            <div class="tbs-info">
+              <div class="tbs-name">Sonu Maurya</div>
+              <div class="tbs-role">Mandap Decorator</div>
+            </div>
+          </li>
 
-          <div class="tm-person">
-            <div class="tm-icon-ring"><i class="fa-solid fa-archway"></i></div>
-            <span class="tm-name">Sonu Maurya</span>
-            <span class="tm-role">Mandap Decorator</span>
-          </div>
+          <li class="tbs-card">
+            <div class="tbs-photo-wrap">
+              <img class="tbs-photo" src="services-images/dj.png" alt="Rahul Maurya" loading="lazy">
+              <div class="tbs-photo-shimmer"></div>
+            </div>
+            <div class="tbs-info">
+              <div class="tbs-name">Rahul Maurya</div>
+              <div class="tbs-role">DJ &amp; LED Screen</div>
+            </div>
+          </li>
 
-          <div class="tm-person">
-            <div class="tm-icon-ring"><i class="fa-solid fa-music"></i></div>
-            <span class="tm-name">Rahul Maurya</span>
-            <span class="tm-role">DJ &amp; LED Screen</span>
-          </div>
+          <li class="tbs-card">
+            <div class="tbs-photo-wrap">
+              <img class="tbs-photo" src="services-images/florist.png" alt="Ravi Maurya" loading="lazy">
+              <div class="tbs-photo-shimmer"></div>
+            </div>
+            <div class="tbs-info">
+              <div class="tbs-name">Ravi Maurya</div>
+              <div class="tbs-role">Flower Decorator</div>
+            </div>
+          </li>
 
-          <div class="tm-person">
-            <div class="tm-icon-ring"><i class="fa-solid fa-fan"></i></div>
-            <span class="tm-name">Ravi Maurya</span>
-            <span class="tm-role">Flower Decorator</span>
-          </div>
+          <li class="tbs-card">
+            <div class="tbs-photo-wrap">
+              <img class="tbs-photo" src="services-images/caterer.png" alt="Parmeshwar Rajput" loading="lazy">
+              <div class="tbs-photo-shimmer"></div>
+            </div>
+            <div class="tbs-info">
+              <div class="tbs-name">Parmeshwar Rajput</div>
+              <div class="tbs-role">Caterer</div>
+            </div>
+          </li>
 
-          <div class="tm-person">
-            <div class="tm-icon-ring"><i class="fa-solid fa-utensils"></i></div>
-            <span class="tm-name">Parmeshwar Rajput</span>
-            <span class="tm-role">Caterer</span>
-          </div>
+        </ul>
 
-        </div>
-      </div>
+        <!-- Right arrow -->
+        <button class="tbs-arrow tbs-arrow-right" id="tbsRight" aria-label="Scroll right">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+      </div><!-- /tbs-wrapper -->
 
     </div>
   </section>
+
 
 
   <!-- ===== HOW IT WORKS ===== -->
