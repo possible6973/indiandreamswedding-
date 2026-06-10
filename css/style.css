@@ -3820,3 +3820,136 @@ ul.team-bios li:hover img.team-image {
   .bios .h3.team-title { font-size: 0.85rem; }
   .bios .h6        { font-size: 0.62rem; }
 }
+
+/* ============================================================
+   TEAM BIOS FINAL FIX — force horizontal layout
+   ============================================================ */
+
+/* Wrapper: relative for arrow button */
+#teamBios {
+  position: relative;
+  overflow: hidden;
+  padding: 0 0 10px 0;
+}
+
+/* FORCE horizontal flex row — override any conflicting styles */
+ul#teamBiosList,
+ul.team-bios {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  gap: 18px !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 8px 8px 20px !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+ul#teamBiosList::-webkit-scrollbar,
+ul.team-bios::-webkit-scrollbar { display: none; }
+
+/* Each card: fixed width, NO shrink */
+ul.team-bios li {
+  flex: 0 0 220px !important;
+  width: 220px !important;
+  min-width: 220px !important;
+  max-width: 220px !important;
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 0 !important;
+  margin: 0 !important;
+  list-style: none !important;
+}
+ul.team-bios li:hover { transform: translateY(-7px); }
+
+/* Portrait photo — fixed height */
+ul.team-bios li img.team-image {
+  width: 100% !important;
+  height: 280px !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(212,175,55,0.28) !important;
+  position: static !important;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+ul.team-bios li:hover img.team-image {
+  border-color: rgba(212,175,55,0.65) !important;
+  box-shadow: 0 14px 36px rgba(74,0,16,0.5) !important;
+}
+
+/* Name — below photo, NOT overlaid */
+ul.team-bios li .h3.team-title {
+  font-family: var(--font-heading) !important;
+  font-size: 0.98rem !important;
+  font-weight: 700 !important;
+  color: #e8c96a !important;
+  margin: 12px 0 4px !important;
+  line-height: 1.25 !important;
+  position: static !important;
+  display: block !important;
+  text-align: left !important;
+  background: none !important;
+  padding: 0 !important;
+}
+
+/* Role — below name */
+ul.team-bios li .h6 {
+  font-family: var(--font-body) !important;
+  font-size: 0.68rem !important;
+  font-weight: 400 !important;
+  color: rgba(255,255,255,0.48) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.1px !important;
+  position: static !important;
+  display: block !important;
+  text-align: left !important;
+  background: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* Arrow — right side */
+.nav-arrow-right {
+  position: absolute !important;
+  right: -18px !important;
+  top: 38% !important;
+  transform: translateY(-50%) !important;
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50% !important;
+  border: 1.5px solid #d4af37 !important;
+  background: rgba(20,0,6,0.92) !important;
+  color: #d4af37 !important;
+  font-size: 0.9rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  z-index: 20 !important;
+  transition: background 0.25s, transform 0.25s;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.5) !important;
+}
+.nav-arrow-right:hover {
+  background: #d4af37 !important;
+  color: #1a0008 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  ul.team-bios li      { flex: 0 0 180px !important; width: 180px !important; min-width: 180px !important; }
+  ul.team-bios li img.team-image { height: 230px !important; }
+}
+@media (max-width: 480px) {
+  ul.team-bios li      { flex: 0 0 145px !important; width: 145px !important; min-width: 145px !important; }
+  ul.team-bios li img.team-image { height: 185px !important; }
+}
