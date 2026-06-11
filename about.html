@@ -93,6 +93,155 @@
   </section>
 
   <!-- ===== TEAM SECTION ===== -->
+
+  <!-- Reference-matched CSS — scoped to #our-team to avoid global conflicts -->
+  <style>
+    /* --- wrap & section --- */
+    #our-team { padding: 70px 0; }
+    #our-team .container { position: relative; }
+
+    /* --- .bios wrapper (from reference) --- */
+    #our-team .bios {
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* --- "Meet the Team" label (h5) --- */
+    #our-team .bios .h5 {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(212,175,55,0.7);
+      margin-bottom: 28px;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.5;
+      display: block;
+    }
+
+    /* --- horizontal scroll list (from reference ul.team-bios) --- */
+    #our-team ul.team-bios {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      list-style: none !important;
+      margin: 0 !important;
+      padding: 0 0 20px 0 !important;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      gap: 0;
+    }
+    #our-team ul.team-bios::-webkit-scrollbar { display: none; }
+
+    /* --- each li (from reference .team-bios li) --- */
+    #our-team ul.team-bios li {
+      flex: 0 0 auto !important;
+      width: 240px !important;
+      min-width: 240px !important;
+      margin-right: 20px !important;
+      list-style: none !important;
+      padding: 0 !important;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    #our-team ul.team-bios li:hover { transform: translateY(-6px); }
+
+    /* --- portrait photo (from reference img.team-image) --- */
+    #our-team img.team-image {
+      display: block !important;
+      width: 100% !important;
+      height: 320px !important;
+      object-fit: cover !important;
+      object-position: top center !important;
+      border-radius: 6px !important;
+      margin: 0 !important;
+      border: 1px solid rgba(212,175,55,0.25) !important;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #our-team ul.team-bios li:hover img.team-image {
+      border-color: rgba(212,175,55,0.6) !important;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.45) !important;
+    }
+
+    /* --- name (.h3.team-title — from reference) --- */
+    #our-team .bios .h3.team-title {
+      display: block !important;
+      position: static !important;
+      font-family: 'Playfair Display', serif !important;
+      font-size: 18px !important;
+      font-weight: 700 !important;
+      color: #e8c96a !important;
+      margin: 14px 0 5px !important;
+      line-height: 1.2 !important;
+      background: none !important;
+      padding: 0 !important;
+      letter-spacing: 0 !important;
+      text-transform: none !important;
+    }
+
+    /* --- role (.h6 — from reference) --- */
+    #our-team .bios .h6 {
+      display: block !important;
+      position: static !important;
+      font-family: 'Poppins', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 500 !important;
+      letter-spacing: .2em !important;
+      line-height: 1.5 !important;
+      text-transform: uppercase !important;
+      color: rgba(255,255,255,0.48) !important;
+      background: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border: none !important;
+    }
+
+    /* --- arrow button (from reference: display:block inside .bios) --- */
+    #our-team button.nav-arrow-right {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      position: absolute !important;
+      right: -20px !important;
+      top: 40% !important;
+      transform: translateY(-50%) !important;
+      width: 44px !important;
+      height: 44px !important;
+      border-radius: 50% !important;
+      border: 1.5px solid #d4af37 !important;
+      background: rgba(20,0,6,0.9) !important;
+      color: #d4af37 !important;
+      font-size: 16px !important;
+      cursor: pointer !important;
+      z-index: 20 !important;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.45) !important;
+      transition: background 0.25s, transform 0.25s;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    #our-team button.nav-arrow-right:hover {
+      background: #d4af37 !important;
+      color: #1a0008 !important;
+      transform: translateY(-50%) scale(1.1) !important;
+    }
+
+    /* --- responsive: tablet --- */
+    @media (max-width: 768px) {
+      #our-team ul.team-bios li { width: 190px !important; min-width: 190px !important; }
+      #our-team img.team-image  { height: 255px !important; }
+      #our-team button.nav-arrow-right { right: -10px !important; }
+    }
+    @media (max-width: 480px) {
+      #our-team ul.team-bios li { width: 155px !important; min-width: 155px !important; margin-right: 14px !important; }
+      #our-team img.team-image  { height: 200px !important; }
+      #our-team .bios .h3.team-title { font-size: 15px !important; }
+    }
+  </style>
+
   <section class="team-section" id="our-team">
     <div class="team-palace-bg"></div>
     <div class="container">
@@ -103,7 +252,7 @@
         <h2 class="team-heading-luxury">Meet Our Team</h2>
       </div>
 
-      <!-- EXACT same structure as reference -->
+      <!-- bios: same structure as reference -->
       <div class="bios" id="teamBios" role="main">
 
         <div class="h5">Meet the Team</div>
@@ -180,6 +329,7 @@
 
     </div>
   </section>
+
 
   <!-- ===== HOW IT WORKS ===== -->
   <section class="steps-section animate-on-scroll">
