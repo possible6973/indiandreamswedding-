@@ -7,12 +7,380 @@
   <meta name="description" content="Explore our handpicked premium wedding lawns, banquets, and resorts in Surat, Gujarat. We design royal experiences at the finest venues.">
   <link rel="icon" href="indiandremwedding logo .png" sizes="150x150">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <!-- Vercel Speed Insights -->
-  <script>
-    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <style>
+    /* --- Venues Marketplace Layout --- */
+    .venues-marketplace-container {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 40px;
+      margin-top: 40px;
+      align-items: start;
+    }
+
+    /* --- Sidebar Filters --- */
+    .filters-sidebar {
+      background: rgba(26, 0, 8, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+      padding: 24px;
+      position: sticky;
+      top: 110px;
+      z-index: 100;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+    .sidebar-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #e8c96a;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+    .btn-clear-filters {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 4px 8px;
+    }
+    .btn-clear-filters:hover {
+      color: #e8c96a;
+    }
+    .filter-group {
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 20px;
+    }
+    .filter-group:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .filter-group h4 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 12px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .search-input-wrapper {
+      position: relative;
+    }
+    .search-input-wrapper input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 4px;
+      padding: 10px 36px 10px 12px;
+      color: #fff;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input-wrapper input:focus {
+      border-color: #d4af37;
+    }
+    .search-input-wrapper i {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(212, 175, 55, 0.6);
+      font-size: 14px;
+    }
+    .filter-options-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .filter-option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.8);
+      transition: color 0.2s;
+      user-select: none;
+      position: relative;
+    }
+    .filter-option-item:hover {
+      color: #e8c96a;
+    }
+    .filter-option-item input[type="radio"],
+    .filter-option-item input[type="checkbox"] {
+      accent-color: #d4af37;
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* --- Venues Results List --- */
+    .venues-results-list {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    /* --- Horizontal Venue Card --- */
+    .venue-horizontal-card {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      background: rgba(26, 0, 8, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      position: relative;
+    }
+    .venue-horizontal-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(212, 175, 55, 0.6);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+    .venue-card-gallery {
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      min-height: 280px;
+    }
+    .venue-card-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .venue-horizontal-card:hover .venue-card-gallery img {
+      transform: scale(1.08);
+    }
+    .venue-type-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: rgba(212, 175, 55, 0.9);
+      color: #1a0008;
+      padding: 4px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      z-index: 2;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .venue-fav-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(26, 0, 8, 0.8);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      color: rgba(212, 175, 55, 0.8);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 2;
+    }
+    .venue-fav-btn:hover {
+      background: #d4af37;
+      color: #1a0008;
+      transform: scale(1.1);
+    }
+    .venue-fav-btn.active {
+      background: #d4af37;
+      color: #1a0008;
+    }
+
+    .venue-card-details {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .venue-header-row {
+      margin-bottom: 12px;
+    }
+    .venue-header-row h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      color: #e8c96a;
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+    }
+    .venue-subtitle {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0;
+    }
+    .venue-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .venue-tag {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.15);
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .venue-tag i {
+      color: #d4af37;
+    }
+    .venue-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.75);
+      margin: 0 0 20px 0;
+    }
+    .venue-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(212, 175, 55, 0.15);
+      padding-top: 18px;
+      margin-top: auto;
+    }
+    .venue-response-info {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.45);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .venue-response-info i {
+      color: #25d366;
+    }
+    .btn-request-pricing {
+      background: #000 !important;
+      color: #fff !important;
+      border: 1px solid #d4af37 !important;
+      padding: 10px 20px !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      letter-spacing: 1.5px !important;
+      text-transform: uppercase !important;
+      border-radius: 4px !important;
+      transition: all 0.25s var(--ease) !important;
+      cursor: pointer !important;
+      text-decoration: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .btn-request-pricing:hover {
+      background: #d4af37 !important;
+      color: #1a0008 !important;
+      border-color: #d4af37 !important;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    /* --- Mobile Toggle Button for Filters --- */
+    .mobile-filter-toggle {
+      display: none;
+      width: 100%;
+      background: rgba(26, 0, 8, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: #e8c96a;
+      padding: 12px;
+      border-radius: 6px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-close-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: #e8c96a;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* --- Responsive Layout --- */
+    @media (max-width: 992px) {
+      .venues-marketplace-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .mobile-filter-toggle {
+        display: flex;
+      }
+      .sidebar-close-btn {
+        display: block;
+      }
+      .filters-sidebar {
+        position: fixed;
+        top: 0;
+        left: -320px;
+        width: 300px;
+        height: 100vh;
+        overflow-y: auto;
+        z-index: 1000;
+        transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        border-radius: 0;
+        border-top: none;
+        border-bottom: none;
+      }
+      .filters-sidebar.active {
+        left: 0;
+      }
+      .filters-sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+      }
+      .filters-sidebar-overlay.active {
+        display: block;
+      }
+      .venue-horizontal-card {
+        grid-template-columns: 1fr;
+      }
+      .venue-card-gallery {
+        height: 220px;
+        min-height: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -79,198 +447,394 @@
         <p class="subtitle">Explore our handpicked premium wedding lawns, grand banquet halls, and luxury resorts in and around Surat, perfectly designed to host your dream royal celebrations.</p>
       </div>
 
-      <div class="venues-grid">
+      <!-- Mobile toggle button for filters -->
+      <button class="mobile-filter-toggle" id="mobileFilterToggle">
+        <i class="fa-solid fa-sliders"></i> Filter Options
+      </button>
+
+      <div class="filters-sidebar-overlay"></div>
+
+      <div class="venues-marketplace-container">
         
-        <!-- 1. Rajwadi Palace Gardens -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.05s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Palace Lawns</span>
-            <img src="services-images/Varmala.jpg" alt="Rajwadi Palace Gardens" loading="lazy">
+        <!-- Left Sidebar Filters -->
+        <aside class="filters-sidebar">
+          <div class="sidebar-header">
+            <h3>Filters</h3>
+            <button class="sidebar-close-btn" id="sidebarCloseBtn"><i class="fa-solid fa-xmark"></i></button>
+            <button class="btn-clear-filters" id="clearFiltersBtn">Clear All</button>
           </div>
-          <div class="venue-body">
-            <h3>Rajwadi Palace Gardens</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Dumas Road, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 1500 - 3000 Guests</span>
-            </div>
-            <p>A grand royal estate featuring majestic heritage facades, palatial archways, and a massive lush green lawn perfect for hosting luxurious big fat Indian weddings.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Rajwadi%20Palace%20Gardens%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- 2. The Golden Leaf Ballroom -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.1s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Banquet Hall</span>
-            <img src="services-images/Ganesh Sthapan.jpg" alt="The Golden Leaf Ballroom" loading="lazy">
-          </div>
-          <div class="venue-body">
-            <h3>The Golden Leaf Ballroom</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> VIP Road, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 500 - 1000 Guests</span>
-            </div>
-            <p>A fully air-conditioned luxury banquet hall featuring grand double-height ceilings, crystal chandeliers, and intricate gold carvings on the walls.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Golden%20Leaf%20Ballroom%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
+          <!-- Location Search -->
+          <div class="filter-group">
+            <h4>Location</h4>
+            <div class="search-input-wrapper">
+              <input type="text" id="venueSearch" placeholder="Search location (e.g. Dumas, VIP Road)">
+              <i class="fa-solid fa-magnifying-glass"></i>
             </div>
           </div>
-        </div>
 
-        <!-- 3. Peacock Garden Resort -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.15s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Luxury Resort</span>
-            <img src="services-images/Mayra.jpg" alt="Peacock Garden Resort" loading="lazy">
+          <!-- Venue Category -->
+          <div class="filter-group">
+            <h4>Vendor Category</h4>
+            <ul class="filter-options-list">
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueType" value="all" checked>
+                  All Categories
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueType" value="palace-lawns">
+                  Palace Lawns
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueType" value="banquet-hall">
+                  Banquet Hall
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueType" value="luxury-resort">
+                  Luxury Resort
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueType" value="royal-courtyard">
+                  Royal Courtyard
+                </label>
+              </li>
+            </ul>
           </div>
-          <div class="venue-body">
-            <h3>Peacock Garden Resort</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Dumas, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 1000 - 2500 Guests</span>
-            </div>
-            <p>A picturesque riverside retreat offering vast green meadows, scenic pool-side dining options, and premium accommodation suites for out-of-town guests.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Peacock%20Garden%20Resort%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- 4. Shehnai Banquet & Lawns -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.2s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Semi-Open Lawn</span>
-            <img src="services-images/Reception.jpg" alt="Shehnai Banquet & Lawns" loading="lazy">
+          <!-- Capacity -->
+          <div class="filter-group">
+            <h4>Capacity</h4>
+            <ul class="filter-options-list">
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueCapacity" value="all" checked>
+                  Any Capacity
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueCapacity" value="under-500">
+                  Under 500 Guests
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueCapacity" value="500-1000">
+                  500 - 1000 Guests
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueCapacity" value="1000-2000">
+                  1000 - 2000 Guests
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="radio" name="venueCapacity" value="above-2000">
+                  Above 2000 Guests
+                </label>
+              </li>
+            </ul>
           </div>
-          <div class="venue-body">
-            <h3>Shehnai Banquet &amp; Lawns</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Adajan, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 800 - 1500 Guests</span>
-            </div>
-            <p>A versatile hybrid space offering a large open-air lawn attached directly to a modern indoor banquet hall, ideal for hosting multi-day wedding festivities.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Shehnai%20Banquet%20and%20Lawns%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
-            </div>
-          </div>
-        </div>
 
-        <!-- 5. The Heritage Pavilion -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.25s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Royal Courtyard</span>
-            <img src="services-images/Engagement Decor.jpg" alt="The Heritage Pavilion" loading="lazy">
+          <!-- Services/Amenities -->
+          <div class="filter-group">
+            <h4>Services</h4>
+            <ul class="filter-options-list">
+              <li>
+                <label class="filter-option-item">
+                  <input type="checkbox" name="venueServices" value="open-lawn">
+                  Open Lawn
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="checkbox" name="venueServices" value="ac-banquet">
+                  AC Banquet
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="checkbox" name="venueServices" value="valet-parking">
+                  Valet Parking
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="checkbox" name="venueServices" value="rooms-included">
+                  Rooms Included
+                </label>
+              </li>
+              <li>
+                <label class="filter-option-item">
+                  <input type="checkbox" name="venueServices" value="catering-included">
+                  Catering Included
+                </label>
+              </li>
+            </ul>
           </div>
-          <div class="venue-body">
-            <h3>The Heritage Pavilion</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Canal Road, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 600 - 1200 Guests</span>
-            </div>
-            <p>Inspired by classical Gujarati stepwells and Rajput Havelis, this courtyard features carved sandstone arches, traditional lamps, and central pheras canopy areas.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Heritage%20Pavilion%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
-            </div>
-          </div>
-        </div>
+        </aside>
 
-        <!-- 6. Vaikunth Grand Banquet -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.3s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Indoor Hall</span>
-            <img src="services-images/Bride To Be.jpg" alt="Vaikunth Grand Banquet" loading="lazy">
-          </div>
-          <div class="venue-body">
-            <h3>Vaikunth Grand Banquet</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Pal, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 400 - 800 Guests</span>
-            </div>
-            <p>An elite, high-end indoor venue featuring luxury acoustic paneling, state-of-the-art stage lighting setups, and customizable thematic seating options.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Vaikunth%20Grand%20Banquet%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
-            </div>
-          </div>
-        </div>
+        <!-- Right Side Venues Results -->
+        <div class="venues-results-list" id="venuesResultsList">
 
-        <!-- 7. Marigold Meadows -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.35s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Theme Lawns</span>
-            <img src="services-images/Haldi Setup.jpg" alt="Marigold Meadows" loading="lazy">
-          </div>
-          <div class="venue-body">
-            <h3>Marigold Meadows</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Dumas Road, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 1200 - 2000 Guests</span>
+          <!-- 1. Rajwadi Palace Gardens -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="palace-lawns" data-capacity-min="1500" data-capacity-max="3000" data-services="open-lawn,valet-parking">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Palace Lawns</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Varmala.jpg" alt="Rajwadi Palace Gardens" loading="lazy">
             </div>
-            <p>A expansive landscaped lawn designed with multi-level terraces, perfect for custom flower canopies, traditional Haldi-Mehndi setups, and carnival events.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Marigold%20Meadows%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Rajwadi Palace Gardens</h3>
+                <p class="venue-subtitle">Palace Lawns in Dumas Road, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 1500 - 3000 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+                <span class="venue-tag"><i class="fa-solid fa-square-parking"></i> Valet Parking</span>
+              </div>
+              <p class="venue-desc">A grand royal estate featuring majestic heritage facades, palatial archways, and a massive lush green lawn perfect for hosting luxurious big fat Indian weddings.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Rajwadi%20Palace%20Gardens%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 8. Shree Ganesha Lawns -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.4s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Open Lawn</span>
-            <img src="services-images/Mehndi Setup.jpg" alt="Shree Ganesha Lawns" loading="lazy">
-          </div>
-          <div class="venue-body">
-            <h3>Shree Ganesha Lawns</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Katargam, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 1000 - 1800 Guests</span>
+          <!-- 2. The Golden Leaf Ballroom -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="500" data-capacity-max="1000" data-services="ac-banquet,catering-included">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Banquet Hall</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Ganesh Sthapan.jpg" alt="The Golden Leaf Ballroom" loading="lazy">
             </div>
-            <p>A highly popular open-air lawn featuring traditional entrance gate architecture and premium structural setups for massive royal stages.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Shree%20Ganesha%20Lawns%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>The Golden Leaf Ballroom</h3>
+                <p class="venue-subtitle">Banquet Hall in VIP Road, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 500 - 1000 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-snowflake"></i> AC Banquet</span>
+                <span class="venue-tag"><i class="fa-solid fa-utensils"></i> Catering Included</span>
+              </div>
+              <p class="venue-desc">A fully air-conditioned luxury banquet hall featuring grand double-height ceilings, crystal chandeliers, and intricate gold carvings on the walls.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Golden%20Leaf%20Ballroom%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 9. Royal Orchid Resort -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.45s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Destination Resort</span>
-            <img src="services-images/Carnival.jpg" alt="Royal Orchid Resort" loading="lazy">
-          </div>
-          <div class="venue-body">
-            <h3>Royal Orchid Resort</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Hazira Highway, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 500 - 1200 Guests</span>
+          <!-- 3. Peacock Garden Resort -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="luxury-resort" data-capacity-min="1000" data-capacity-max="2500" data-services="open-lawn,rooms-included">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Luxury Resort</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Mayra.jpg" alt="Peacock Garden Resort" loading="lazy">
             </div>
-            <p>Ideal for destination theme weddings, featuring grand pool-side sangeet stage setups, luxury rooms, and five-star hospitality services.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Royal%20Orchid%20Resort%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Peacock Garden Resort</h3>
+                <p class="venue-subtitle">Luxury Resort in Dumas, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 1000 - 2500 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+                <span class="venue-tag"><i class="fa-solid fa-bed"></i> Rooms Included</span>
+              </div>
+              <p class="venue-desc">A picturesque riverside retreat offering vast green meadows, scenic pool-side dining options, and premium accommodation suites for out-of-town guests.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 2-3 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Peacock%20Garden%20Resort%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 10. The Grand Mandapam Banquet -->
-        <div class="venue-card animate-on-scroll" style="animation-delay: 0.5s;">
-          <div class="venue-image">
-            <span class="venue-type-tag">Traditional Hall</span>
-            <img src="services-images/Ganesh Sthapan.jpg" alt="The Grand Mandapam Banquet" loading="lazy">
-          </div>
-          <div class="venue-body">
-            <h3>The Grand Mandapam Banquet</h3>
-            <div class="venue-meta">
-              <span><i class="fa-solid fa-location-dot"></i> Vesu, Surat</span>
-              <span><i class="fa-solid fa-users"></i> 600 - 1000 Guests</span>
+          <!-- 4. Shehnai Banquet & Lawns -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="800" data-capacity-max="1500" data-services="ac-banquet,open-lawn">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Semi-Open Lawn</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Reception.jpg" alt="Shehnai Banquet & Lawns" loading="lazy">
             </div>
-            <p>Designed with wooden interior highlights, royal domes, and large pillars, this indoor venue has been optimized for hosting traditional Indian mandap setups.</p>
-            <div class="venue-footer">
-              <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Grand%20Mandapam%20Banquet%20for%20my%20event." class="btn btn-gold" target="_blank"><i class="fa-solid fa-envelope"></i> Inquire Venue</a>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Shehnai Banquet &amp; Lawns</h3>
+                <p class="venue-subtitle">Banquet & Lawn in Adajan, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 800 - 1500 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-snowflake"></i> AC Banquet</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+              </div>
+              <p class="venue-desc">A versatile hybrid space offering a large open-air lawn attached directly to a modern indoor banquet hall, ideal for hosting multi-day wedding festivities.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Shehnai%20Banquet%20and%20Lawns%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
             </div>
           </div>
-        </div>
 
+          <!-- 5. The Heritage Pavilion -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="royal-courtyard" data-capacity-min="600" data-capacity-max="1200" data-services="open-lawn,valet-parking">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Royal Courtyard</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Engagement Decor.jpg" alt="The Heritage Pavilion" loading="lazy">
+            </div>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>The Heritage Pavilion</h3>
+                <p class="venue-subtitle">Royal Courtyard in Canal Road, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 600 - 1200 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+                <span class="venue-tag"><i class="fa-solid fa-square-parking"></i> Valet Parking</span>
+              </div>
+              <p class="venue-desc">Inspired by classical Gujarati stepwells and Rajput Havelis, this courtyard features carved sandstone arches, traditional lamps, and central pheras canopy areas.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Heritage%20Pavilion%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. Vaikunth Grand Banquet -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="400" data-capacity-max="800" data-services="ac-banquet">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Indoor Hall</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Bride To Be.jpg" alt="Vaikunth Grand Banquet" loading="lazy">
+            </div>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Vaikunth Grand Banquet</h3>
+                <p class="venue-subtitle">Indoor Hall in Pal, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 400 - 800 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-snowflake"></i> AC Banquet</span>
+              </div>
+              <p class="venue-desc">An elite, high-end indoor venue featuring luxury acoustic paneling, state-of-the-art stage lighting setups, and customizable thematic seating options.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Vaikunth%20Grand%20Banquet%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Marigold Meadows -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="palace-lawns" data-capacity-min="1200" data-capacity-max="2000" data-services="open-lawn">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Theme Lawns</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Haldi Setup.jpg" alt="Marigold Meadows" loading="lazy">
+            </div>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Marigold Meadows</h3>
+                <p class="venue-subtitle">Theme Lawns in Dumas Road, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 1200 - 2000 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+              </div>
+              <p class="venue-desc">A expansive landscaped lawn designed with multi-level terraces, perfect for custom flower canopies, traditional Haldi-Mehndi setups, and carnival events.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 2-3 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Marigold%20Meadows%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. Shree Ganesha Lawns -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="palace-lawns" data-capacity-min="1000" data-capacity-max="1800" data-services="open-lawn">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Open Lawn</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Mehndi Setup.jpg" alt="Shree Ganesha Lawns" loading="lazy">
+            </div>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Shree Ganesha Lawns</h3>
+                <p class="venue-subtitle">Open Lawn in Katargam, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 1000 - 1800 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+              </div>
+              <p class="venue-desc">A highly popular open-air lawn featuring traditional entrance gate architecture and premium structural setups for massive royal stages.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Shree%20Ganesha%20Lawns%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. Royal Orchid Resort -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="luxury-resort" data-capacity-min="500" data-capacity-max="1200" data-services="open-lawn,rooms-included">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Destination Resort</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Carnival.jpg" alt="Royal Orchid Resort" loading="lazy">
+            </div>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>Royal Orchid Resort</h3>
+                <p class="venue-subtitle">Destination Resort in Hazira Highway, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 500 - 1200 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-tree"></i> Open Lawn</span>
+                <span class="venue-tag"><i class="fa-solid fa-bed"></i> Rooms Included</span>
+              </div>
+              <p class="venue-desc">Ideal for destination theme weddings, featuring pool-side sangeet setups, luxury rooms, and five-star hospitality services.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 2-3 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Royal%20Orchid%20Resort%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. The Grand Mandapam Banquet -->
+          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="600" data-capacity-max="1000" data-services="ac-banquet">
+            <div class="venue-card-gallery">
+              <span class="venue-type-badge">Traditional Hall</span>
+              <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
+              <img src="services-images/Ganesh Sthapan.jpg" alt="The Grand Mandapam Banquet" loading="lazy">
+            </div>
+            <div class="venue-card-details">
+              <div class="venue-header-row">
+                <h3>The Grand Mandapam Banquet</h3>
+                <p class="venue-subtitle">Traditional Hall in Vesu, Surat</p>
+              </div>
+              <div class="venue-tags-row">
+                <span class="venue-tag"><i class="fa-solid fa-users"></i> 600 - 1000 Guests</span>
+                <span class="venue-tag"><i class="fa-solid fa-snowflake"></i> AC Banquet</span>
+              </div>
+              <p class="venue-desc">Designed with wooden interior highlights, royal domes, and large pillars, this indoor venue has been optimized for hosting traditional Indian mandap setups.</p>
+              <div class="venue-card-footer">
+                <span class="venue-response-info"><i class="fa-solid fa-circle-check"></i> Avg response time: 1-2 hrs</span>
+                <a href="https://wa.me/919999999999?text=Hi%20Indians%20Dream%20Wedding!%20I%20want%20to%20inquire%20about%20the%20Grand%20Mandapam%20Banquet%20for%20my%20event." class="btn-request-pricing" target="_blank">REQUEST PRICING</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </section>
