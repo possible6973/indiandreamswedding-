@@ -392,21 +392,119 @@ document.addEventListener('DOMContentLoaded', () => {
   updateArrows(); // init state
 })();
 
-/* Team bios scroll — matches reference button/list IDs */
+/* Team bios scroll with mouse drag & auto-slide */
 (function () {
-  var list = document.getElementById('teamBiosList');
-  var btn  = document.getElementById('teamScrollRight');
-  if (!list || !btn) return;
-  btn.addEventListener('click', function () {
-    list.scrollBy({ left: 260, behavior: 'smooth' });
+  const slider = document.getElementById('teamBiosList');
+  const btnRight = document.getElementById('teamScrollRight');
+  if (!slider) return;
+
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  let autoplayTimer = null;
+  const AUTOPLAY_DELAY = 3000; // auto slide every 3 seconds
+
+  // Dragging event handlers
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.style.scrollBehavior = 'auto'; // disable smooth scrolling while dragging for responsive movement
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+    stopAutoplay();
   });
-  /* Loop back to start when end reached */
-  list.addEventListener('scroll', function () {
-    var atEnd = list.scrollLeft >= list.scrollWidth - list.clientWidth - 8;
-    if (atEnd) {
-      setTimeout(function () {
-        list.scrollTo({ left: 0, behavior: 'smooth' });
-      }, 600);
+
+  slider.addEventListener('mouseleave', () => {
+    if (isDown) {
+      slider.style.scrollBehavior = 'smooth';
     }
+    isDown = false;
+    startAutoplay();
+  });
+
+  slider.addEventListener('mouseup', () => {
+    if (isDown) {
+      slider.style.scrollBehavior = 'smooth';
+    }
+    isDown = false;
+    startAutoplay();
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.5; // multiplier for speed
+    slider.scrollLeft = scrollLeft - walk;
+  });
+
+  // Prevent default image drag behaviors
+  slider.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+
+  // Touch support for mobile devices
+  slider.addEventListener('touchstart', () => {
+    stopAutoplay();
+    slider.style.scrollBehavior = 'auto';
   }, { passive: true });
+
+  slider.addEventListener('touchend', () => {
+    slider.style.scrollBehavior = 'smooth';
+    startAutoplay();
+  }, { passive: true });
+
+  // Autoplay function
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayTimer = setInterval(() => {
+      const firstCard = slider.querySelector('li');
+      let step = 260; // fallback step
+      if (firstCard) {
+        step = firstCard.offsetWidth + parseFloat(window.getComputedStyle(firstCard).marginRight || 0);
+      }
+      
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft >= maxScrollLeft - 10) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        slider.scrollBy({ left: step, behavior: 'smooth' });
+      }
+    }, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  // Button right click handler
+  if (btnRight) {
+    btnRight.addEventListener('click', () => {
+      stopAutoplay();
+      const firstCard = slider.querySelector('li');
+      let step = 260;
+      if (firstCard) {
+        step = firstCard.offsetWidth + parseFloat(window.getComputedStyle(firstCard).marginRight || 0);
+      }
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft >= maxScrollLeft - 10) {
+        slider.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        slider.scrollBy({ left: step, behavior: 'smooth' });
+      }
+      startAutoplay();
+    });
+  }
+
+  // Hover container to pause/resume autoplay
+  const biosContainer = document.querySelector('#our-team .bios');
+  if (biosContainer) {
+    biosContainer.addEventListener('mouseenter', stopAutoplay);
+    biosContainer.addEventListener('mouseleave', startAutoplay);
+  }
+
+  // Initialize
+  startAutoplay();
 })();
