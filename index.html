@@ -70,8 +70,9 @@
   <!-- ========== HERO SECTION - Grand Royal Entry ========== -->
   <section class="hero" id="hero-section">
     <div class="hero-bg">
-      <video autoplay loop muted playsinline poster="services-images/Hero_Widescreen.jpg">
-        <source src="services-images/hero-video.mp4" type="video/mp4">
+      <video autoplay loop muted playsinline poster="services-images/Hero_Widescreen.webp?v=2" fetchpriority="high">
+        <source src="services-images/hero-video.mp4?v=2" type="video/mp4">
+        <track kind="captions" src="" label="No captions" default>
       </video>
     </div>
     <div class="hero-overlay"></div>
@@ -79,8 +80,12 @@
     <div class="container">
       <div class="hero-content">
         <span class="decorative-text">Shree Ganeshay Namah</span>
-        <h1>Experience the Grandeur of <span>Royal Indian</span> Celebrations</h1>
-        <div class="hero-divider-line"></div>
+        <h1>Experience the Grandeur of<br class="desktop-only"> <span>Royal Indian</span> Celebrations</h1>
+        <div class="hero-divider">
+          <span class="hero-divider-line"></span>
+          <i class="fa-solid fa-crown hero-divider-icon"></i>
+          <span class="hero-divider-line"></span>
+        </div>
         <p>From majestic weddings to spectacular theme designs, we shape your dreams into royal realities with rich aesthetics and seamless execution.</p>
         <div class="hero-buttons">
           <a href="services.html" class="btn btn-gold"><i class="fa-solid fa-gem"></i> Explore Services</a>
@@ -114,24 +119,58 @@
     </div>
   </section>
 
-  <!-- ========== ABOUT PREVIEW SECTION ========== -->
-  <section class="about-section home-about" id="about-preview">
+  <!-- ========== OUR BRANDS SECTION ========== -->
+  <section class="brands-section">
     <div class="container">
-      <div class="about-grid">
-        <div class="about-image animate-on-scroll">
-          <img src="services-images/Ganesh Sthapan.jpg" alt="Indians Dream Wedding Team Setting Up Royal Decor" loading="lazy">
-        </div>
-        <div class="about-text animate-on-scroll delay-2">
-          <span class="decorative-text">Namaste &amp; Welcome</span>
-          <h2>Crafting Unforgettable Royal Experiences</h2>
-          <div class="section-divider divider-left">
-            <span class="divider-line"></span>
-            <i class="fa-solid fa-gem divider-icon"></i>
-            <span class="divider-line"></span>
+      <div class="brands-frame animate-on-scroll">
+        <h3 class="brands-section-title">Our Brands</h3>
+        <div class="brands-grid">
+          <!-- Brand 1: Mandap Wale -->
+          <div class="brand-card">
+            <div class="brand-logo-container">
+              <img src="rajwadi-assets/Wedding Mandap.png" alt="Mandap Wale Logo" class="brand-logo-img">
+            </div>
+            <div class="brand-info">
+              <h4>Mandap Wale</h4>
+              <p class="brand-subtitle">Premium Wedding Decoration</p>
+              <p class="brand-details">Mandap | Stage | Floral | Entrance</p>
+              <a href="contact.html?brand=mandap-wale" class="btn btn-gold brand-btn">VIEW PROFILE</a>
+            </div>
           </div>
-          <p>Celebrate life's special moments with <strong>Indians Dream Wedding</strong>! From beautiful Engagement and Baby Shower Decorations to custom themes like Jungle and Boss Baby, we bring your vision to life with precision and creativity.</p>
-          <p>We are your go-to event partner in Ahmedabad and across Gujarat for all celebrations. We handle everything from venue styling, entry systems, sound, catering, and anchors to let you enjoy your special day completely stress-free.</p>
-          <a href="about.html" class="btn btn-primary mt-1">Read Our Story <i class="fa-solid fa-arrow-right"></i></a>
+          
+          <!-- Vertical Divider -->
+          <div class="brand-divider">
+            <span class="divider-line-vertical"></span>
+            <i class="fa-solid fa-gem divider-icon-vertical"></i>
+            <span class="divider-line-vertical"></span>
+          </div>
+          
+          <!-- Brand 2: Manbhavak Events -->
+          <div class="brand-card">
+            <div class="brand-logo-container">
+              <svg class="brand-logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="44" fill="none" stroke="#d4af37" stroke-width="2"/>
+                <circle cx="50" cy="50" r="38" fill="none" stroke="#d4af37" stroke-width="1" stroke-dasharray="3 3"/>
+                <g fill="#d4af37">
+                  <path d="M50,2 L53,8 L50,6 L47,8 Z"/>
+                  <path d="M50,98 L53,92 L50,94 L47,92 Z"/>
+                  <path d="M2,50 L8,53 L6,50 L8,47 Z"/>
+                  <path d="M98,50 L92,53 L94,50 L92,47 Z"/>
+                  <circle cx="18" cy="18" r="3"/>
+                  <circle cx="82" cy="18" r="3"/>
+                  <circle cx="18" cy="82" r="3"/>
+                  <circle cx="82" cy="82" r="3"/>
+                </g>
+                <text x="50" y="61" font-family="'Cinzel', 'Playfair Display', 'Georgia', serif" font-size="32" font-weight="bold" fill="#d4af37" text-anchor="middle">M</text>
+              </svg>
+            </div>
+            <div class="brand-info">
+              <h4>Manbhavak Events</h4>
+              <p class="brand-subtitle">Wedding & Event Management</p>
+              <p class="brand-details">Planning | Coordination | Perfection</p>
+              <a href="contact.html?brand=manbhavak-events" class="btn btn-gold brand-btn">VIEW PROFILE</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -154,156 +193,269 @@
       </div>
       
       <div class="services-grid">
-        <!-- 1. Engagement -->
-        <div class="service-card animate-on-scroll">
+        <!-- 1. Engagement Ceremony -->
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.05s;">
           <div class="card-image">
-            <img src="services-images/Engagement Decor.jpg" alt="Engagement Decor" loading="lazy">
+            <picture>
+            <source srcset="services-images/engagement-decoration-surat-01.webp?v=2" type="image/webp">
+            <img src="services-images/engagement-decoration-surat-01.jpg?v=2" alt="Premium engagement stage in Surat (Setup 1)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Engagement</h4>
+            <h4>Engagement Ceremony</h4>
             <p>Elegant layouts and divine stages for your beautiful ring ceremony.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
-        
-        <!-- 2. Baby Shower -->
-        <div class="service-card animate-on-scroll delay-1">
+
+        <!-- 2. Baby Shower Decor -->
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.10s;">
           <div class="card-image">
-            <img src="services-images/Baby Shower Decor.jpg" alt="Baby Shower Decor" loading="lazy">
+            <picture>
+            <source srcset="services-images/carnival-decoration-surat-03.webp?v=2" type="image/webp">
+            <img src="services-images/carnival-decoration-surat-03.jpg?v=2" alt="Colorful carnival theme decor in Surat (Carnival Theme 3)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Baby Shower</h4>
+            <h4>Baby Shower Decor</h4>
             <p>Celebrate new beginnings with cheerful and elegant setups.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
-        
-        <!-- 3. Bride & Groom Entry -->
-        <div class="service-card animate-on-scroll delay-2">
+
+        <!-- 3. Royal Bride & Groom Entry -->
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.15s;">
           <div class="card-image">
-            <img src="services-images/Royal Bride & Groom Entry.jpg" alt="Bride & Groom Entry Setup" loading="lazy">
+            <picture>
+            <source srcset="services-images/bride-entry-surat-01.webp?v=2" type="image/webp">
+            <img src="services-images/bride-entry-surat-01.jpg?v=2" alt="Royal bride entry setup in Surat (Walk 1)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Bride &amp; Groom Entry</h4>
-            <p>Make a spectacular, unforgettable grand entry fit for royalty.</p>
+            <h4>Royal Bride & Groom Entry</h4>
+            <p>Make a grand entrance with royal props and spectacular pyrotechnics.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
-        
-        <!-- 4. Birthday Celebration -->
-        <div class="service-card animate-on-scroll delay-3">
+
+        <!-- 4. Sangeet Setup -->
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.20s;">
           <div class="card-image">
-            <img src="services-images/Birthday Celebration.jpg" alt="Birthday Celebration Setup" loading="lazy">
+            <picture>
+            <source srcset="services-images/sangeet-decoration-surat-01.webp?v=2" type="image/webp">
+            <img src="services-images/sangeet-decoration-surat-01.jpg?v=2" alt="Vibrant sangeet stage decor in Surat (Sangeet Setup 1)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Birthday Celebration</h4>
-            <p>Fabulous theme birthdays that bring joy to kids and adults alike.</p>
+            <h4>Sangeet Setup</h4>
+            <p>Electrifying musical stages, sound, and backdrops for dance celebrations.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
-        
-        <!-- 5. Haldi & Mehndi -->
-        <div class="service-card animate-on-scroll">
+
+        <!-- 5. Haldi Setup -->
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.25s;">
           <div class="card-image">
-            <img src="services-images/Haldi Setup.jpg" alt="Haldi & Mehndi Setup" loading="lazy">
+            <picture>
+            <source srcset="services-images/haldi-decoration-surat-01.webp?v=2" type="image/webp">
+            <img src="services-images/haldi-decoration-surat-01.jpg?v=2" alt="Vibrant haldi ceremony decoration in Surat (Haldi Setup 1)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Haldi &amp; Mehndi</h4>
-            <p>Vibrant yellow and floral decors overflowing with festive energy.</p>
+            <h4>Haldi Setup</h4>
+            <p>Traditional yellow themes and marigold setups for your pre-wedding rituals.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
-        
+
         <!-- 6. Carnival Theme -->
-        <div class="service-card animate-on-scroll delay-1">
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.30s;">
           <div class="card-image">
-            <img src="services-images/Carnival.jpg" alt="Carnival Theme Setup" loading="lazy">
+            <picture>
+            <source srcset="services-images/carnival-decoration-surat-04.webp?v=2" type="image/webp">
+            <img src="services-images/carnival-decoration-surat-04.jpg?v=2" alt="Amazing carnival theme decor in Surat (Carnival Theme 4)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Carnival &amp; Fair Themes</h4>
-            <p>Stunning, grand carnival style decoration for events and public functions.</p>
+            <h4>Carnival Theme</h4>
+            <p>Vibrant color themes, games, and fun setups for all guests.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
 
         <!-- 7. Catering Services -->
-        <div class="service-card animate-on-scroll delay-2">
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.35s;">
           <div class="card-image">
-            <img src="services-images/Catering Services.jpg" alt="Catering Services Setup" loading="lazy">
+            <picture>
+            <source srcset="services-images/reception-decoration-surat-01.webp?v=2" type="image/webp">
+            <img src="services-images/reception-decoration-surat-01.jpg?v=2" alt="Grand reception stage backdrop in Surat (Reception Theme 1)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
             <h4>Catering Services</h4>
-            <p>Premium traditional and international cuisines prepared by top chefs.</p>
+            <p>Delectable multi-cuisine food tables and royal hospitality.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
 
-        <!-- 8. Reception -->
-        <div class="service-card animate-on-scroll delay-3">
+        <!-- 8. Grand Reception Stage -->
+        <div class="service-card animate-on-scroll" style="animation-delay: 0.40s;">
           <div class="card-image">
-            <img src="services-images/Reception.jpg" alt="Reception Decor" loading="lazy">
+            <picture>
+            <source srcset="services-images/reception-decoration-surat-02.webp?v=2" type="image/webp">
+            <img src="services-images/reception-decoration-surat-02.jpg?v=2" alt="Luxury reception stage backdrop in Surat (Reception Theme 2)" loading="lazy" width="1200" height="1200">
+          </picture>
           </div>
           <div class="card-body">
-            <h4>Grand Reception</h4>
+            <h4>Grand Reception Stage</h4>
             <p>Luxurious backdrops, lighting, and stages for your grand reception.</p>
             <a href="services.html" class="btn btn-gold">Explore Details</a>
           </div>
         </div>
+
       </div>
       
-      <div class="text-center mt-3">
-        <a href="services.html" class="btn btn-primary">View All 29 Services <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="text-center mt-5 animate-on-scroll">
+        <a href="services.html" class="btn btn-primary">View All Services <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
 
-  <!-- ========== WHY CHOOSE US ========== -->
-  <section class="why-section" id="why-choose-us">
+  <!-- ========== ABOUT PREVIEW SECTION ========== -->
+  <section class="about-section home-about" id="about-preview">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image animate-on-scroll">
+          <picture>
+            <source srcset="services-images/wedding-decoration-surat-43.webp?v=2" type="image/webp">
+            <img src="services-images/wedding-decoration-surat-43.jpg?v=2" alt="Indians Dream Wedding Royal Decoration Setup" loading="lazy" width="1200" height="1200">
+          </picture>
+        </div>
+        <div class="about-content animate-on-scroll">
+          <span class="decorative-text">Humari Kahani</span>
+          <h2>Crafting Unforgettable Royal Experiences</h2>
+          <div class="section-divider divider-left">
+            <span class="divider-line"></span>
+            <i class="fa-solid fa-gem divider-icon"></i>
+            <span class="divider-line"></span>
+          </div>
+          <p>Celebrate life's special moments with Indians Dream Wedding! From beautiful Engagement and Baby Shower Decorations to custom themes, we bring your vision to life with precision and creativity.</p>
+          <p>We are your go-to event partner in Surat and across Gujarat for all celebrations. We handle everything from venue styling, entry systems, sound, catering, and anchors.</p>
+          <p>Make every event unforgettable with Indians Dream Wedding! Our dedicated team ensures every detail is perfect.</p>
+          <a href="about.html" class="btn btn-gold">Read Our Story <i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== GALLERY PREVIEW SECTION ========== -->
+  <section class="gallery-preview-section section-padding" id="home-gallery">
     <div class="container">
       <div class="section-header animate-on-scroll">
         <div class="section-title">
-          <span class="decorative-text" style="color: var(--gold-light);">Hum Hi Kyu</span>
-          <h2>Why Indians Dream Wedding?</h2>
+          <span class="decorative-text">Hamari Jhanki</span>
+          <h2>Our Royal Gallery Preview</h2>
         </div>
         <div class="section-divider">
           <span class="divider-line"></span>
-          <i class="fa-solid fa-gem divider-icon"></i>
+          <i class="fa-solid fa-crown divider-icon"></i>
           <span class="divider-line"></span>
         </div>
-        <p class="section-subtitle" style="color: rgba(255,255,255,0.85);">We weave magic into celebrations, ensuring your special moments are designed with royal prestige and absolute care.</p>
+        <p class="section-subtitle">A curated collection of our finest setups, grand stages, and magical celebrations designed with royal prestige.</p>
       </div>
-      
-      <div class="why-grid">
-        <div class="why-card animate-on-scroll">
-          <div class="icon"><i class="fa-solid fa-gem"></i></div>
-          <h4>Royal Aesthetics</h4>
-          <p>We specialize in Rajwadi, Rajasthani, and premium traditional layouts that offer a royal visual grandeur.</p>
+
+      <div class="gallery-grid animate-on-scroll">
+        <!-- Item 1: Royal Wedding Setup -->
+        <div class="gallery-item" data-category="wedding">
+          <picture>
+            <source srcset="services-images/wedding-decoration-surat-02.webp?v=2" type="image/webp">
+            <img src="services-images/wedding-decoration-surat-02.jpg?v=2" alt="Royal Wedding Setup in Surat" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Royal Wedding Setup</span>
+          </div>
         </div>
-        <div class="why-card animate-on-scroll delay-1">
-          <div class="icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-          <h4>Custom Themes</h4>
-          <p>From traditional setups to modern children's birthday themes, we build setups specific to your unique taste.</p>
+
+        <!-- Item 2: Grand Reception Stage -->
+        <div class="gallery-item" data-category="reception">
+          <picture>
+            <source srcset="services-images/reception-decoration-surat-02.webp?v=2" type="image/webp">
+            <img src="services-images/reception-decoration-surat-02.jpg?v=2" alt="Grand Reception Stage in Surat" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Grand Reception Stage</span>
+          </div>
         </div>
-        <div class="why-card animate-on-scroll delay-2">
-          <div class="icon"><i class="fa-solid fa-people-group"></i></div>
-          <h4>Seamless Coordination</h4>
-          <p>Our experienced coordination managers look after everything, leaving you free to host and enjoy.</p>
+
+        <!-- Item 3: Vibrant Haldi Setup -->
+        <div class="gallery-item" data-category="haldi">
+          <picture>
+            <source srcset="services-images/haldi-decoration-surat-02.webp?v=2" type="image/webp">
+            <img src="services-images/haldi-decoration-surat-02.jpg?v=2" alt="Vibrant Haldi Ceremony" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Vibrant Haldi Ceremony</span>
+          </div>
         </div>
-        <div class="why-card animate-on-scroll">
-          <div class="icon"><i class="fa-solid fa-handshake"></i></div>
-          <h4>Gujarat's Trusted Partner</h4>
-          <p>With 700+ happy clients and 750+ events in Ahmedabad and surrounding cities, our reputation speaks for itself.</p>
+
+        <!-- Item 4: Royal Bride Entry -->
+        <div class="gallery-item" data-category="wedding">
+          <picture>
+            <source srcset="services-images/bride-entry-surat-01.webp?v=2" type="image/webp">
+            <img src="services-images/bride-entry-surat-01.jpg?v=2" alt="Royal Bride Entry" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Royal Bride Entry</span>
+          </div>
         </div>
-        <div class="why-card animate-on-scroll delay-1">
-          <div class="icon"><i class="fa-solid fa-utensils"></i></div>
-          <h4>All-in-One Services</h4>
-          <p>Decorations, entry setups, catering, anchors, singers, vintage cars, and sound - we arrange everything.</p>
+
+        <!-- Item 5: Elegant Mandap Decor -->
+        <div class="gallery-item" data-category="wedding">
+          <picture>
+            <source srcset="services-images/wedding-decoration-surat-06.webp?v=2" type="image/webp">
+            <img src="services-images/wedding-decoration-surat-06.jpg?v=2" alt="Elegant Mandap Decor in Surat" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Elegant Mandap Decor</span>
+          </div>
         </div>
-        <div class="why-card animate-on-scroll delay-2">
-          <div class="icon"><i class="fa-solid fa-heart"></i></div>
-          <h4>Unmatched Attention</h4>
-          <p>Every small detail, from floral choices to illumination colors, is curated carefully for premium style.</p>
+
+        <!-- Item 6: Premium Engagement Stage -->
+        <div class="gallery-item" data-category="engagement">
+          <picture>
+            <source srcset="services-images/engagement-decoration-surat-04.webp?v=2" type="image/webp">
+            <img src="services-images/engagement-decoration-surat-04.jpg?v=2" alt="Premium Engagement Stage" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Premium Engagement Stage</span>
+          </div>
         </div>
+
+        <!-- Item 7: Grand Varmala Setup -->
+        <div class="gallery-item" data-category="varmala">
+          <picture>
+            <source srcset="services-images/varmala-decoration-surat-11.webp?v=2" type="image/webp">
+            <img src="services-images/varmala-decoration-surat-11.jpg?v=2" alt="Grand Varmala Setup in Surat" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Grand Varmala Setup</span>
+          </div>
+        </div>
+
+        <!-- Item 8: Luxury Stage Backdrop -->
+        <div class="gallery-item" data-category="reception">
+          <picture>
+            <source srcset="services-images/reception-decoration-surat-05.webp?v=2" type="image/webp">
+            <img src="services-images/reception-decoration-surat-05.jpg?v=2" alt="Luxury Stage Backdrop" loading="lazy" width="600" height="600">
+          </picture>
+          <div class="gallery-overlay">
+            <span>Luxury Stage Backdrop</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5 animate-on-scroll">
+        <a href="gallery.html" class="btn btn-primary">View Full Gallery <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -359,7 +511,7 @@
       </div>
       
       <div class="testimonials-carousel animate-on-scroll">
-        <div class="testimonials-track">
+        <div class="testimonials-track" aria-live="polite">
           <!-- 1 -->
           <div class="testimonial-card">
             <div class="testimonial-content-wrapper">
@@ -427,13 +579,174 @@
     </div>
   </section>
 
+
+  <!-- ========== FAQ SECTION ========== -->
+  <section class="faq-section section-padding" id="faq">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <div class="section-title">
+          <span class="decorative-text">Sawaalat</span>
+          <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="section-divider">
+          <span class="divider-line"></span>
+          <i class="fa-solid fa-gem divider-icon"></i>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+
+      <div class="faq-grid">
+        <details class="faq-item animate-on-scroll">
+          <summary class="faq-question"><i class="fa-solid fa-chevron-right faq-icon"></i> What types of events do you organize in Surat?</summary>
+          <div class="faq-answer">
+            <p>Indians Dream Wedding specializes in weddings, engagement ceremonies, haldi &amp; sangeet functions, reception stages, baby showers, carnival themes, varmala setups, and corporate events. We operate across Surat, Ahmedabad, and all major cities in Gujarat.</p>
+          </div>
+        </details>
+
+        <details class="faq-item animate-on-scroll">
+          <summary class="faq-question"><i class="fa-solid fa-chevron-right faq-icon"></i> How far in advance should we book your services?</summary>
+          <div class="faq-answer">
+            <p>We recommend booking at least 2–3 months in advance for weddings and large events to ensure your preferred dates and themes are available. For smaller events like baby showers or birthdays, 3–4 weeks is usually sufficient.</p>
+          </div>
+        </details>
+
+        <details class="faq-item animate-on-scroll">
+          <summary class="faq-question"><i class="fa-solid fa-chevron-right faq-icon"></i> Do you offer custom decoration themes?</summary>
+          <div class="faq-answer">
+            <p>Absolutely! Every event we design is fully customized to your vision. Whether you want a Royal Rajwadi theme, a modern minimalist setup, or a specific color palette — our team creates bespoke layouts tailored to your taste and budget.</p>
+          </div>
+        </details>
+
+        <details class="faq-item animate-on-scroll">
+          <summary class="faq-question"><i class="fa-solid fa-chevron-right faq-icon"></i> What is included in your wedding packages?</summary>
+          <div class="faq-answer">
+            <p>Our packages range from ₹49,999 (Silver) to ₹4,99,999 (Royal) and include stage decoration, floral setups, lighting, entry gates, welcome boards, DJ sound, anchors, photography, and more. Each tier builds upon the previous one. We also offer fully custom packages.</p>
+          </div>
+        </details>
+
+        <details class="faq-item animate-on-scroll">
+          <summary class="faq-question"><i class="fa-solid fa-chevron-right faq-icon"></i> Do you provide catering and entertainment services?</summary>
+          <div class="faq-answer">
+            <p>Yes, we are a full-service event company. Beyond decoration, we arrange multi-cuisine catering, professional anchors (male &amp; female), live singers, DJ &amp; orchestra, dance groups, dhol-nagara, vintage cars, and even helicopter entries for your grand celebration.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Indians Dream Wedding",
+    "url": "https://indiansdreamwedding.com",
+    "logo": "https://indiansdreamwedding.com/indiandremwedding%20logo%20.png",
+    "description": "Premium Rajwadi themed event planning and decoration services in Surat, Gujarat.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "167, Priyanka Township",
+      "addressLocality": "Surat",
+      "addressRegion": "Gujarat",
+      "postalCode": "395010",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-99999-99999",
+      "contactType": "customer service",
+      "availableLanguage": ["English", "Hindi", "Gujarati"]
+    },
+    "sameAs": [
+      "https://www.instagram.com/indiansdreamwedding",
+      "https://youtube.com/@indiansdreamwedding"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Indians Dream Wedding",
+    "image": "https://indiansdreamwedding.com/services-images/wedding-decoration-surat-01.jpg",
+    "url": "https://indiansdreamwedding.com",
+    "telephone": "+91-99999-99999",
+    "priceRange": "₹₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "167, Priyanka Township",
+      "addressLocality": "Surat",
+      "addressRegion": "Gujarat",
+      "postalCode": "395010",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 21.140495,
+      "longitude": 72.882425
+    },
+    "areaServed": ["Surat", "Ahmedabad", "Gujarat"],
+    "serviceType": ["Wedding Decoration", "Event Planning", "Engagement Ceremony", "Reception Stage", "Haldi Setup", "Sangeet Setup"]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What types of events do you organize in Surat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Indians Dream Wedding specializes in weddings, engagement ceremonies, haldi & sangeet functions, reception stages, baby showers, carnival themes, varmala setups, and corporate events. We operate across Surat, Ahmedabad, and all major cities in Gujarat."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far in advance should we book your services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We recommend booking at least 2–3 months in advance for weddings and large events. For smaller events like baby showers or birthdays, 3–4 weeks is usually sufficient."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer custom decoration themes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! Every event we design is fully customized to your vision. Whether you want a Royal Rajwadi theme, a modern minimalist setup, or a specific color palette — our team creates bespoke layouts tailored to your taste and budget."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is included in your wedding packages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our packages range from ₹49,999 (Silver) to ₹4,99,999 (Royal) and include stage decoration, floral setups, lighting, entry gates, welcome boards, DJ sound, anchors, photography, and more."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you provide catering and entertainment services?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, we arrange multi-cuisine catering, professional anchors, live singers, DJ & orchestra, dance groups, dhol-nagara, vintage cars, and even helicopter entries."
+        }
+      }
+    ]
+  }
+  </script>
+
   <!-- ========== CTA BANNER ========== -->
   <section class="cta-banner" id="cta-section">
     <div class="container">
       <span class="decorative-text">Sankalp</span>
       <h2>Let&rsquo;s Plan Your Royal Celebration Together</h2>
       <p>Consult with our lead event designers today and receive a customized layout proposal.</p>
-      <span class="cta-phone"><i class="fa-solid fa-phone"></i> +91 99999 99999</span>
+      <a href="tel:+919999999999" class="cta-phone"><i class="fa-solid fa-phone"></i> +91 99999 99999</a>
       <div class="cta-buttons">
         <a href="https://wa.me/919999999999" target="_blank" class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
         <a href="contact.html" class="btn btn-gold"><i class="fa-regular fa-envelope"></i> Request Consultation</a>
@@ -475,8 +788,8 @@
             <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Engagement Ceremony</a></li>
             <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Baby Shower Decor</a></li>
             <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Royal Bride-Groom Entry</a></li>
-            <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Theme Birthdays</a></li>
-            <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Haldi &amp; Mehndi Setup</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Sangeet Setup</a></li>
+            <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Haldi Setup</a></li>
             <li><a href="services.html"><i class="fa-solid fa-chevron-right"></i> Grand Reception Stage</a></li>
           </ul>
         </div>
@@ -501,7 +814,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p>&copy; 2026 Indians Dream Wedding. All Rights Reserved. Designed with Royal Heritage. | <a href="#" target="_blank"><i class="fa-solid fa-map-location-dot"></i> View on Google Maps</a></p>
+        <p>&copy; 2026 Indians Dream Wedding. All Rights Reserved. Designed with Royal Heritage. | <a href="https://www.google.com/maps/search/?api=1&query=Dream+kailasha+Banquethall+Surat" target="_blank"><i class="fa-solid fa-map-location-dot"></i> View on Google Maps</a></p>
       </div>
     </div>
   </footer>
@@ -515,6 +828,12 @@
   <button class="back-to-top" aria-label="Back to Top" id="back-to-top">
     <i class="fa-solid fa-arrow-up"></i>
   </button>
+
+  <!-- Lightbox -->
+  <div class="lightbox">
+    <img src="" alt="Gallery Preview" loading="lazy">
+    <button class="lightbox-close" aria-label="Close Lightbox">&times;</button>
+  </div>
 
   <!-- Custom Scripts -->
   <script src="js/main.js"></script>

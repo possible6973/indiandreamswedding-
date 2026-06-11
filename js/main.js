@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (backToTop) {
       backToTop.classList.toggle('visible', scrollY > 400);
     }
-  });
+  }, { passive: true });
 
   if (backToTop) {
     backToTop.addEventListener('click', () => {
@@ -526,3 +526,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize
   startAutoplay();
 })();
+
+
+

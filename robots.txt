@@ -1,0 +1,13 @@
+# Indians Dream Wedding — robots.txt
+# https://indiansdreamwedding.com
+
+User-agent: *
+Allow: /
+
+# Disallow legacy WordPress directories
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /wp-includes/
+
+# Sitemap
+Sitemap: https://indiansdreamwedding.com/sitemap.xml
