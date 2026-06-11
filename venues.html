@@ -16,124 +16,9 @@
   <style>
     /* --- Venues Marketplace Layout --- */
     .venues-marketplace-container {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 40px;
+      display: block;
       margin-top: 40px;
-      align-items: start;
-    }
-
-    /* --- Sidebar Filters --- */
-    .filters-sidebar {
-      background: #ffffff;
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 8px;
-      padding: 24px;
-      position: sticky;
-      top: 110px;
-      z-index: 100;
-      box-shadow: 0 6px 20px rgba(128, 0, 32, 0.04);
-    }
-    .sidebar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-      padding-bottom: 14px;
-      margin-bottom: 20px;
-    }
-    .sidebar-header h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      color: var(--maroon);
-      margin: 0;
-      letter-spacing: 1px;
-    }
-    .btn-clear-filters {
-      background: none;
-      border: none;
-      color: var(--text-light);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      cursor: pointer;
-      transition: color 0.2s;
-      padding: 4px 8px;
-    }
-    .btn-clear-filters:hover {
-      color: var(--maroon);
-    }
-    .filter-group {
-      margin-bottom: 24px;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.15);
-      padding-bottom: 20px;
-    }
-    .filter-group:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-    .filter-group h4 {
-      font-family: 'Poppins', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--maroon);
-      margin: 0 0 12px 0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .search-input-wrapper {
-      position: relative;
-    }
-    .search-input-wrapper input {
       width: 100%;
-      background: #ffffff;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      border-radius: 4px;
-      padding: 10px 36px 10px 12px;
-      color: var(--text-body);
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .search-input-wrapper input:focus {
-      border-color: var(--maroon);
-    }
-    .search-input-wrapper i {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--maroon-light);
-      font-size: 14px;
-    }
-    .filter-options-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .filter-option-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      font-size: 13px;
-      color: var(--text-body);
-      transition: color 0.2s;
-      user-select: none;
-      position: relative;
-    }
-    .filter-option-item:hover {
-      color: var(--maroon);
-    }
-    .filter-option-item input[type="radio"],
-    .filter-option-item input[type="checkbox"] {
-      accent-color: var(--maroon);
-      cursor: pointer;
-      width: 16px;
-      height: 16px;
     }
 
     /* --- Venues Results List --- */
@@ -141,6 +26,7 @@
       display: flex;
       flex-direction: column;
       gap: 30px;
+      width: 100%;
     }
 
     /* --- Horizontal Venue Card --- */
@@ -316,79 +202,8 @@
       transform: translateY(-2px);
     }
 
-    /* --- Mobile Toggle Button for Filters --- */
-    .mobile-filter-toggle {
-      display: none;
-      width: 100%;
-      background: #ffffff;
-      border: 1px solid rgba(212, 175, 55, 0.3);
-      color: var(--maroon);
-      padding: 12px;
-      border-radius: 6px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .sidebar-close-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--maroon);
-      font-size: 20px;
-      cursor: pointer;
-    }
-
     /* --- Responsive Layout --- */
     @media (max-width: 992px) {
-      .venues-marketplace-container {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .mobile-filter-toggle {
-        display: flex;
-      }
-      .sidebar-close-btn {
-        display: block;
-      }
-      .filters-sidebar {
-        position: fixed;
-        top: 0;
-        left: -320px;
-        width: 300px;
-        height: 100vh;
-        overflow-y: auto;
-        z-index: 1000;
-        transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        border-radius: 0;
-        border-top: none;
-        border-bottom: none;
-        background: #ffffff;
-      }
-      .filters-sidebar.active {
-        left: 0;
-      }
-      .filters-sidebar-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-      }
-      .filters-sidebar-overlay.active {
-        display: block;
-      }
       .venue-horizontal-card {
         grid-template-columns: 1fr;
       }
@@ -464,153 +279,17 @@
         <p class="subtitle">Explore our handpicked premium wedding lawns, grand banquet halls, and luxury resorts in and around Surat, perfectly designed to host your dream royal celebrations.</p>
       </div>
 
-      <!-- Mobile toggle button for filters -->
-      <button class="mobile-filter-toggle" id="mobileFilterToggle">
-        <i class="fa-solid fa-sliders"></i> Filter Options
-      </button>
-
-      <div class="filters-sidebar-overlay"></div>
-
       <div class="venues-marketplace-container">
         
-        <!-- Left Sidebar Filters -->
-        <aside class="filters-sidebar">
-          <div class="sidebar-header">
-            <h3>Filters</h3>
-            <button class="sidebar-close-btn" id="sidebarCloseBtn"><i class="fa-solid fa-xmark"></i></button>
-            <button class="btn-clear-filters" id="clearFiltersBtn">Clear All</button>
-          </div>
-
-          <!-- Location Search -->
-          <div class="filter-group">
-            <h4>Location</h4>
-            <div class="search-input-wrapper">
-              <input type="text" id="venueSearch" placeholder="Search location (e.g. Dumas, VIP Road)">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-          </div>
-
-          <!-- Venue Category -->
-          <div class="filter-group">
-            <h4>Vendor Category</h4>
-            <ul class="filter-options-list">
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueType" value="all" checked>
-                  All Categories
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueType" value="palace-lawns">
-                  Palace Lawns
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueType" value="banquet-hall">
-                  Banquet Hall
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueType" value="luxury-resort">
-                  Luxury Resort
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueType" value="royal-courtyard">
-                  Royal Courtyard
-                </label>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Capacity -->
-          <div class="filter-group">
-            <h4>Capacity</h4>
-            <ul class="filter-options-list">
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueCapacity" value="all" checked>
-                  Any Capacity
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueCapacity" value="under-500">
-                  Under 500 Guests
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueCapacity" value="500-1000">
-                  500 - 1000 Guests
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueCapacity" value="1000-2000">
-                  1000 - 2000 Guests
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="radio" name="venueCapacity" value="above-2000">
-                  Above 2000 Guests
-                </label>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Services/Amenities -->
-          <div class="filter-group">
-            <h4>Services</h4>
-            <ul class="filter-options-list">
-              <li>
-                <label class="filter-option-item">
-                  <input type="checkbox" name="venueServices" value="open-lawn">
-                  Open Lawn
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="checkbox" name="venueServices" value="ac-banquet">
-                  AC Banquet
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="checkbox" name="venueServices" value="valet-parking">
-                  Valet Parking
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="checkbox" name="venueServices" value="rooms-included">
-                  Rooms Included
-                </label>
-              </li>
-              <li>
-                <label class="filter-option-item">
-                  <input type="checkbox" name="venueServices" value="catering-included">
-                  Catering Included
-                </label>
-              </li>
-            </ul>
-          </div>
-        </aside>
-
-        <!-- Right Side Venues Results -->
-        <div class="venues-results-list" id="venuesResultsList">
+        <!-- Venues Results List (Full Width) -->
+        <div class="venues-results-list" id="venuesResultsList" style="width: 100%;">
 
           <!-- 1. Rajwadi Palace Gardens -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="palace-lawns" data-capacity-min="1500" data-capacity-max="3000" data-services="open-lawn,valet-parking">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Palace Lawns</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Varmala.jpg" alt="Rajwadi Palace Gardens" loading="lazy">
+              <img src="services-images/Ahuja-Blog-2-1-1-1024x577.jpg" alt="Rajwadi Palace Gardens" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -631,11 +310,11 @@
           </div>
 
           <!-- 2. The Golden Leaf Ballroom -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="500" data-capacity-max="1000" data-services="ac-banquet,catering-included">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Banquet Hall</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Ganesh Sthapan.jpg" alt="The Golden Leaf Ballroom" loading="lazy">
+              <img src="services-images/mca-6_15_103370.jpeg" alt="The Golden Leaf Ballroom" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -656,11 +335,11 @@
           </div>
 
           <!-- 3. Peacock Garden Resort -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="luxury-resort" data-capacity-min="1000" data-capacity-max="2500" data-services="open-lawn,rooms-included">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Luxury Resort</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Mayra.jpg" alt="Peacock Garden Resort" loading="lazy">
+              <img src="services-images/OIP.webp" alt="Peacock Garden Resort" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -681,11 +360,11 @@
           </div>
 
           <!-- 4. Shehnai Banquet & Lawns -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="800" data-capacity-max="1500" data-services="ac-banquet,open-lawn">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Semi-Open Lawn</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Reception.jpg" alt="Shehnai Banquet & Lawns" loading="lazy">
+              <img src="services-images/Ahuja-Blog-2-1-1-1024x577.jpg" alt="Shehnai Banquet & Lawns" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -706,11 +385,11 @@
           </div>
 
           <!-- 5. The Heritage Pavilion -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="royal-courtyard" data-capacity-min="600" data-capacity-max="1200" data-services="open-lawn,valet-parking">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Royal Courtyard</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Engagement Decor.jpg" alt="The Heritage Pavilion" loading="lazy">
+              <img src="services-images/mca-6_15_103370.jpeg" alt="The Heritage Pavilion" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -731,11 +410,11 @@
           </div>
 
           <!-- 6. Vaikunth Grand Banquet -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="400" data-capacity-max="800" data-services="ac-banquet">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Indoor Hall</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Bride To Be.jpg" alt="Vaikunth Grand Banquet" loading="lazy">
+              <img src="services-images/OIP.webp" alt="Vaikunth Grand Banquet" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -755,11 +434,11 @@
           </div>
 
           <!-- 7. Marigold Meadows -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="palace-lawns" data-capacity-min="1200" data-capacity-max="2000" data-services="open-lawn">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Theme Lawns</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Haldi Setup.jpg" alt="Marigold Meadows" loading="lazy">
+              <img src="services-images/Ahuja-Blog-2-1-1-1024x577.jpg" alt="Marigold Meadows" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -779,11 +458,11 @@
           </div>
 
           <!-- 8. Shree Ganesha Lawns -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="palace-lawns" data-capacity-min="1000" data-capacity-max="1800" data-services="open-lawn">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Open Lawn</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Mehndi Setup.jpg" alt="Shree Ganesha Lawns" loading="lazy">
+              <img src="services-images/mca-6_15_103370.jpeg" alt="Shree Ganesha Lawns" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -803,11 +482,11 @@
           </div>
 
           <!-- 9. Royal Orchid Resort -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="luxury-resort" data-capacity-min="500" data-capacity-max="1200" data-services="open-lawn,rooms-included">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Destination Resort</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Carnival.jpg" alt="Royal Orchid Resort" loading="lazy">
+              <img src="services-images/OIP.webp" alt="Royal Orchid Resort" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">
@@ -828,11 +507,11 @@
           </div>
 
           <!-- 10. The Grand Mandapam Banquet -->
-          <div class="venue-horizontal-card animate-on-scroll" data-type="banquet-hall" data-capacity-min="600" data-capacity-max="1000" data-services="ac-banquet">
+          <div class="venue-horizontal-card animate-on-scroll">
             <div class="venue-card-gallery">
               <span class="venue-type-badge">Traditional Hall</span>
               <button class="venue-fav-btn" aria-label="Add to favorites"><i class="fa-regular fa-heart"></i></button>
-              <img src="services-images/Ganesh Sthapan.jpg" alt="The Grand Mandapam Banquet" loading="lazy">
+              <img src="services-images/Ahuja-Blog-2-1-1-1024x577.jpg" alt="The Grand Mandapam Banquet" loading="lazy">
             </div>
             <div class="venue-card-details">
               <div class="venue-header-row">

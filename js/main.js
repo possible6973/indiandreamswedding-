@@ -364,122 +364,23 @@ document.addEventListener('DOMContentLoaded', () => {
     lazyImages.forEach(img => imgObserver.observe(img));
   }
 
-  // ---------- VENUE MARKETPLACE FILTER ENGINE ----------
-  const searchInput = document.getElementById('venueSearch');
-  const typeFilters = document.querySelectorAll('input[name="venueType"]');
-  const capacityFilters = document.querySelectorAll('input[name="venueCapacity"]');
-  const serviceFilters = document.querySelectorAll('input[name="venueServices"]');
-  const clearBtn = document.getElementById('clearFiltersBtn');
-  const cards = document.querySelectorAll('.venue-horizontal-card');
-  const mobileToggle = document.getElementById('mobileFilterToggle');
-  const sidebar = document.querySelector('.filters-sidebar');
-  const overlay = document.querySelector('.filters-sidebar-overlay');
-  const closeSidebar = document.getElementById('sidebarCloseBtn');
-
-  if (cards.length > 0) {
-    // Mobile drawer toggle handlers
-    if (mobileToggle && sidebar && overlay) {
-      mobileToggle.addEventListener('click', () => {
-        sidebar.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      });
-
-      const closeMenu = () => {
-        sidebar.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      };
-
-      overlay.addEventListener('click', closeMenu);
-      if (closeSidebar) closeSidebar.addEventListener('click', closeMenu);
-    }
-
-    function filterVenues() {
-      const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-      
-      let selectedType = 'all';
-      typeFilters.forEach(radio => {
-        if (radio.checked) selectedType = radio.value;
-      });
-
-      let selectedCapacity = 'all';
-      capacityFilters.forEach(radio => {
-        if (radio.checked) selectedCapacity = radio.value;
-      });
-
-      const selectedServices = [];
-      serviceFilters.forEach(cb => {
-        if (cb.checked) selectedServices.push(cb.value);
-      });
-
-      cards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const subtitle = card.querySelector('.venue-subtitle').textContent.toLowerCase();
-        const desc = card.querySelector('.venue-desc').textContent.toLowerCase();
-        const matchesSearch = title.includes(query) || subtitle.includes(query) || desc.includes(query);
-
-        const cardType = card.dataset.type;
-        const matchesType = (selectedType === 'all' || cardType === selectedType);
-
-        const cardCapacityMin = parseInt(card.dataset.capacityMin || 0);
-        const cardCapacityMax = parseInt(card.dataset.capacityMax || 99999);
-        let matchesCapacity = true;
-        if (selectedCapacity === 'under-500') {
-          matchesCapacity = (cardCapacityMin < 500);
-        } else if (selectedCapacity === '500-1000') {
-          matchesCapacity = (cardCapacityMin <= 1000 && cardCapacityMax >= 500);
-        } else if (selectedCapacity === '1000-2000') {
-          matchesCapacity = (cardCapacityMin <= 2000 && cardCapacityMax >= 1000);
-        } else if (selectedCapacity === 'above-2000') {
-          matchesCapacity = (cardCapacityMax >= 2000);
-        }
-
-        const cardServices = card.dataset.services ? card.dataset.services.split(',') : [];
-        const matchesServices = selectedServices.every(service => cardServices.includes(service));
-
-        if (matchesSearch && matchesType && matchesCapacity && matchesServices) {
-          card.style.display = '';
-          card.style.animation = 'scaleIn 0.35s cubic-bezier(0.25, 1, 0.5, 1) both';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-
-    if (searchInput) searchInput.addEventListener('input', filterVenues);
-    typeFilters.forEach(radio => radio.addEventListener('change', filterVenues));
-    capacityFilters.forEach(radio => radio.addEventListener('change', filterVenues));
-    serviceFilters.forEach(cb => cb.addEventListener('change', filterVenues));
-
-    if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
-        if (searchInput) searchInput.value = '';
-        typeFilters.forEach(radio => radio.checked = (radio.value === 'all'));
-        capacityFilters.forEach(radio => radio.checked = (radio.value === 'all'));
-        serviceFilters.forEach(cb => cb.checked = false);
-        filterVenues();
-      });
-    }
-
-    // Favorite heart toggle handler
-    const favBtns = document.querySelectorAll('.venue-fav-btn');
-    favBtns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        btn.classList.toggle('active');
-        const heartIcon = btn.querySelector('i');
-        if (btn.classList.contains('active')) {
-          heartIcon.className = 'fa-solid fa-heart';
-          heartIcon.style.color = '#1a0008';
-        } else {
-          heartIcon.className = 'fa-regular fa-heart';
-          heartIcon.style.color = '';
-        }
-      });
+  // ---------- VENUE FAVORITES TOGGLER ----------
+  const favBtns = document.querySelectorAll('.venue-fav-btn');
+  favBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      btn.classList.toggle('active');
+      const heartIcon = btn.querySelector('i');
+      if (btn.classList.contains('active')) {
+        heartIcon.className = 'fa-solid fa-heart';
+        heartIcon.style.color = '#1a0008';
+      } else {
+        heartIcon.className = 'fa-regular fa-heart';
+        heartIcon.style.color = '';
+      }
     });
-  }
+  });
 
 });
 
