@@ -5,6 +5,9 @@
 // CONFIGURATION: Set your Google Sheet/Excel Apps Script Webhook URL here
 const GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5QzD7yYlBo2eKYexmIJRA-aWUW15V2GPM8EKxTfohpUPQsuMB73gYywwRMHWT4Zdgsw/exec";
 
+// CONFIGURATION: Set your WhatsApp Business Link here
+const WHATSAPP_LINK = "https://wa.me/message/FPUGPLYHPTDIL1";
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // ---------- STICKY HEADER ----------
@@ -436,7 +439,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Open WhatsApp
         const whatsappURL =
-          `https://wa.me/message/FPUGPLYHPTDIL1?text=${encodeURIComponent(whatsappMessage)}`;
+          `${WHATSAPP_LINK}?text=${encodeURIComponent(whatsappMessage)}`;
 
         window.open(whatsappURL, "_blank");
 
