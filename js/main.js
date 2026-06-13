@@ -434,7 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Open WhatsApp
         const whatsappURL =
-          `https://wa.me/919016786537?text=${encodeURIComponent(whatsappMessage)}`;
+          `https://wa.me/message/FPUGPLYHPTDIL1?text=${encodeURIComponent(whatsappMessage)}`;
 
         window.open(whatsappURL, "_blank");
 
@@ -450,6 +450,30 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = originalBtnText;
       }
     });
+  }
+
+  // URL Parameter Prefill for Contact Form
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramMessage = urlParams.get('message');
+  const paramEventType = urlParams.get('event-type');
+
+  if (paramMessage) {
+    const messageInput = document.getElementById('message');
+    if (messageInput) {
+      messageInput.value = decodeURIComponent(paramMessage);
+    }
+  }
+  if (paramEventType) {
+    const eventTypeInput = document.getElementById('event-type');
+    if (eventTypeInput) {
+      const cleanVal = decodeURIComponent(paramEventType).trim().toLowerCase();
+      for (let option of eventTypeInput.options) {
+        if (option.value.toLowerCase() === cleanVal || option.text.toLowerCase() === cleanVal) {
+          eventTypeInput.value = option.value;
+          break;
+        }
+      }
+    }
   }
 
 });
