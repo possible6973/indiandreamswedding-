@@ -6,7 +6,7 @@
 const GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5QzD7yYlBo2eKYexmIJRA-aWUW15V2GPM8EKxTfohpUPQsuMB73gYywwRMHWT4Zdgsw/exec";
 
 // CONFIGURATION: Set your WhatsApp Business Link here
-const WHATSAPP_LINK = "https://wa.me/message/FPUGPLYHPTDIL1";
+const WHATSAPP_LINK = "https://api.whatsapp.com/message/W5C4CD6QID45E1?autoload=1&app_absent=0";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -438,8 +438,9 @@ document.addEventListener('DOMContentLoaded', () => {
 💬 Message: ${message}`;
 
         // 3. Open WhatsApp
+        const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
         const whatsappURL =
-          `${WHATSAPP_LINK}?text=${encodeURIComponent(whatsappMessage)}`;
+          `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
 
         window.open(whatsappURL, "_blank");
 
