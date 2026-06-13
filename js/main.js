@@ -5,8 +5,11 @@
 // CONFIGURATION: Set your Google Sheet/Excel Apps Script Webhook URL here
 const GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5QzD7yYlBo2eKYexmIJRA-aWUW15V2GPM8EKxTfohpUPQsuMB73gYywwRMHWT4Zdgsw/exec";
 
-// CONFIGURATION: Set your WhatsApp Business Link here
+// CONFIGURATION: WhatsApp Business short link (used for floating chat buttons)
 const WHATSAPP_LINK = "https://api.whatsapp.com/message/W5C4CD6QID45E1?autoload=1&app_absent=0";
+
+// CONFIGURATION: WhatsApp phone number for lead messages (wa.me format supports ?text= prefill)
+const WHATSAPP_PHONE = "917202919807";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -427,24 +430,27 @@ document.addEventListener('DOMContentLoaded', () => {
           body: JSON.stringify(formData)
         });
 
-        // 2. WhatsApp Message Format
+        // 2. WhatsApp Message Format (full lead details)
         const whatsappMessage =
-`🔥 New Booking Lead
+`🔥 *New Booking Lead*
 
-👤 Name: ${name}
-📞 Phone: ${phone}
-📧 Email: ${email}
-🎉 Event Type: ${eventType}
-📅 Event Date: ${eventDate}
-💬 Message: ${message}`;
+👤 *Name:* ${name}
+📞 *Phone:* ${phone}
+📧 *Email:* ${email}
+🎉 *Event Type:* ${eventType}
+📅 *Event Date:* ${eventDate}
+💬 *Message:* ${message}
 
-        // 3. Open WhatsApp
-        const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
-        const whatsappURL =
-          `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
+_Sent from Indians Dream Wedding website_`;
 
-        // Redirect to WhatsApp
-        window.location.href = whatsappURL;
+        // 3. Build WhatsApp URL using wa.me format (supports ?text= prefill)
+        // NOTE: api.whatsapp.com/message short links do NOT support ?text= parameter
+        const whatsappURL = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(whatsappMessage)}`;
+
+        // Redirect to WhatsApp with full lead info
+        setTimeout(() => {
+          window.location.href = whatsappURL;
+        }, 500);
 
       } catch (error) {
         console.log(error);
