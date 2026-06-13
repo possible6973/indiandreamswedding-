@@ -438,24 +438,17 @@ document.addEventListener('DOMContentLoaded', () => {
 📅 Event Date: ${eventDate}
 💬 Message: ${message}`;
 
-        // 3. Open WhatsApp (bulletproof popup bypass redirect)
+        // 3. Open WhatsApp
         const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
         const whatsappURL =
           `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
 
-        const newWindow = window.open(whatsappURL, "_blank");
-        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-          window.location.href = whatsappURL;
-        }
-
-        // Restore button state and reset form
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-        contactForm.reset();
+        // Redirect to WhatsApp
+        window.location.href = whatsappURL;
 
       } catch (error) {
-        console.error("Google Sheet save error:", error);
-        alert("Something went wrong");
+        console.log(error);
+        alert("Error submitting form");
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       }
@@ -606,21 +599,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
         const whatsappURL = `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
-        
-        const newWindow = window.open(whatsappURL, "_blank");
-        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-          window.location.href = whatsappURL;
-        }
 
-        // Clean up
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        waModal.classList.remove('show');
-        waForm.reset();
+        // Redirect to WhatsApp
+        window.location.href = whatsappURL;
 
       } catch (error) {
-        console.error("Google Sheet save error:", error);
-        alert("Something went wrong");
+        console.log(error);
+        alert("Error submitting form");
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
       }
