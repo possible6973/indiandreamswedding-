@@ -390,7 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ---------- CONTACT FORM SUBMISSION TO GOOGLE SHEET & WHATSAPP ----------
   const contactForm = document.querySelector('.contact-form form');
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -417,7 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
 
         // 1. Save to Google Sheet (non-blocking, keepalive to ensure delivery on redirect)
-        fetch(GOOGLE_SHEET_SCRIPT_URL, {
+        await fetch(GOOGLE_SHEET_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           keepalive: true,
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "Content-Type": "application/json"
           },
           body: JSON.stringify(formData)
-        }).catch(err => console.error("Google Sheet save error:", err));
+        });
 
         // 2. WhatsApp Message Format
         const whatsappMessage =
@@ -454,7 +454,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.reset();
 
       } catch (error) {
-        console.error(error);
+        console.error("Google Sheet save error:", error);
         alert("Something went wrong");
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
@@ -560,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (waForm) {
-    waForm.addEventListener('submit', (e) => {
+    waForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('wa-name').value;
       const phone = document.getElementById('wa-phone').value;
@@ -570,31 +570,32 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = waForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
 
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Connecting...';
 
-      const formData = {
-        name,
-        phone,
-        email: 'Direct WhatsApp Lead',
-        eventType,
-        eventDate: 'Not specified',
-        message: customMsg
-      };
+        const formData = {
+          name,
+          phone,
+          email: 'Direct WhatsApp Lead',
+          eventType,
+          eventDate: 'Not specified',
+          message: customMsg
+        };
 
-      // 1. Submit to Google Sheets (raw JSON post payload with keepalive)
-      fetch(GOOGLE_SHEET_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        keepalive: true,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
-      }).catch(err => console.error("Google Sheet save error:", err));
+        // 1. Submit to Google Sheets (raw JSON post payload with keepalive)
+        await fetch(GOOGLE_SHEET_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          keepalive: true,
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        });
 
-      // 2. Open WhatsApp (full message with name, phone, event type, message)
-      const whatsappMessage =
+        // 2. Open WhatsApp (full message with name, phone, event type, message)
+        const whatsappMessage =
 `🔥 New Booking Lead
 
 👤 Name: ${name}
@@ -603,19 +604,26 @@ document.addEventListener('DOMContentLoaded', () => {
 💬 Message: ${customMsg}
 📄 Source: Direct WhatsApp button on ${window.location.pathname}`;
 
-      const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
-      const whatsappURL = `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
-      
-      const newWindow = window.open(whatsappURL, "_blank");
-      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
-        window.location.href = whatsappURL;
-      }
+        const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
+        const whatsappURL = `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
+        
+        const newWindow = window.open(whatsappURL, "_blank");
+        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+          window.location.href = whatsappURL;
+        }
 
-      // Clean up
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalText;
-      waModal.classList.remove('show');
-      waForm.reset();
+        // Clean up
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        waModal.classList.remove('show');
+        waForm.reset();
+
+      } catch (error) {
+        console.error("Google Sheet save error:", error);
+        alert("Something went wrong");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
     });
   }
 
