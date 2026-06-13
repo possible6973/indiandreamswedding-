@@ -382,6 +382,76 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // ---------- CONTACT FORM SUBMISSION TO GOOGLE SHEET & WHATSAPP ----------
+  const contactForm = document.querySelector('.contact-form form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.innerHTML;
+      
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+      const eventType = document.getElementById('event-type').value;
+      const eventDate = document.getElementById('date').value || 'Not specified';
+      const message = document.getElementById('message').value || 'No message';
+      
+      const formData = {
+        name,
+        phone,
+        email,
+        eventType,
+        eventDate,
+        message
+      };
+
+      try {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+        // 1. Save to Google Sheet (non-blocking in case of CORS or network slowness)
+        fetch("https://script.google.com/macros/s/AKfycbw5QzD7yYlBo2eKYexmIJRA-aWUW15V2GPM8EKxTfohpUPQsuMB73gYywwRMHWT4Zdgsw/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }).catch(err => console.error("Google Sheet save error:", err));
+
+        // 2. WhatsApp Message Format
+        const whatsappMessage =
+`🔥 New Booking Lead
+
+👤 Name: ${name}
+📞 Phone: ${phone}
+📧 Email: ${email}
+🎉 Event Type: ${eventType}
+📅 Event Date: ${eventDate}
+💬 Message: ${message}`;
+
+        // 3. Open WhatsApp
+        const whatsappURL =
+          `https://wa.me/919016786537?text=${encodeURIComponent(whatsappMessage)}`;
+
+        window.open(whatsappURL, "_blank");
+
+        // Restore button state and reset form
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+        contactForm.reset();
+
+      } catch (error) {
+        console.error(error);
+        alert("Something went wrong");
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }
+    });
+  }
+
 });
 
 
