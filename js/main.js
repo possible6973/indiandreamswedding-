@@ -2,6 +2,8 @@
    Indians Dream Wedding â€” RAJWADI THEME JS
    Animations, Carousels & Interactions
    ============================================ */
+// CONFIGURATION: Set your Google Sheet/Excel Apps Script Webhook URL here
+const GOOGLE_SHEET_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw5QzD7yYlBo2eKYexmIJRA-aWUW15V2GPM8EKxTfohpUPQsuMB73gYywwRMHWT4Zdgsw/exec";
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -412,7 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
 
         // 1. Save to Google Sheet (non-blocking in case of CORS or network slowness)
-        fetch("https://script.google.com/macros/s/AKfycbw5QzD7yYlBo2eKYexmIJRA-aWUW15V2GPM8EKxTfohpUPQsuMB73gYywwRMHWT4Zdgsw/exec", {
+        fetch(GOOGLE_SHEET_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
           headers: {
