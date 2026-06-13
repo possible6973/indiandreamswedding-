@@ -416,19 +416,15 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
 
-        // 1. Save to Google Sheet (non-blocking in case of CORS or network slowness)
-        const urlEncodedData = new URLSearchParams();
-        urlEncodedData.append("name", name);
-        urlEncodedData.append("phone", phone);
-        urlEncodedData.append("email", email);
-        urlEncodedData.append("eventType", eventType);
-        urlEncodedData.append("eventDate", eventDate);
-        urlEncodedData.append("message", message);
-
+        // 1. Save to Google Sheet (non-blocking, keepalive to ensure delivery on redirect)
         fetch(GOOGLE_SHEET_SCRIPT_URL, {
           method: "POST",
           mode: "no-cors",
-          body: urlEncodedData
+          keepalive: true,
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(formData)
         }).catch(err => console.error("Google Sheet save error:", err));
 
         // 2. WhatsApp Message Format
@@ -442,12 +438,15 @@ document.addEventListener('DOMContentLoaded', () => {
 📅 Event Date: ${eventDate}
 💬 Message: ${message}`;
 
-        // 3. Open WhatsApp
+        // 3. Open WhatsApp (bulletproof popup bypass redirect)
         const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
         const whatsappURL =
           `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
 
-        window.open(whatsappURL, "_blank");
+        const newWindow = window.open(whatsappURL, "_blank");
+        if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+          window.location.href = whatsappURL;
+        }
 
         // Restore button state and reset form
         submitBtn.disabled = false;
@@ -506,6 +505,23 @@ document.addEventListener('DOMContentLoaded', () => {
             <label for="wa-phone"><i class="fa-solid fa-phone"></i> Phone Number</label>
             <input type="tel" id="wa-phone" required placeholder="Your Phone Number">
           </div>
+          <div class="wa-form-group">
+            <label for="wa-event-type"><i class="fa-solid fa-gem"></i> Event Type</label>
+            <select id="wa-event-type" required>
+              <option value="" disabled selected>Select Event Type</option>
+              <option value="Wedding">Wedding Decor</option>
+              <option value="Engagement">Engagement Decor</option>
+              <option value="Haldi">Haldi & Mehndi Setup</option>
+              <option value="Reception">Reception Stage</option>
+              <option value="Baby Shower">Baby Shower Decor</option>
+              <option value="Birthday">Birthday Celebration</option>
+              <option value="Other">Other Event</option>
+            </select>
+          </div>
+          <div class="wa-form-group">
+            <label for="wa-message"><i class="fa-solid fa-message"></i> Message</label>
+            <textarea id="wa-message" rows="2" placeholder="Describe your requirement (optional)..."></textarea>
+          </div>
           <button type="submit" class="wa-submit-btn"><i class="fa-brands fa-whatsapp"></i> Start WhatsApp Chat</button>
         </form>
       </div>
@@ -548,6 +564,9 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const name = document.getElementById('wa-name').value;
       const phone = document.getElementById('wa-phone').value;
+      const eventType = document.getElementById('wa-event-type').value;
+      const customMsg = document.getElementById('wa-message').value || 'No specific details';
+
       const submitBtn = waForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
 
@@ -557,59 +576,46 @@ document.addEventListener('DOMContentLoaded', () => {
       const formData = {
         name,
         phone,
-        email: 'Direct WhatsApp Inquiry',
-        eventType: 'Inquiry',
+        email: 'Direct WhatsApp Lead',
+        eventType,
         eventDate: 'Not specified',
-        message: 'Clicked direct WhatsApp link on page: ' + window.location.pathname
+        message: customMsg
       };
 
-      // 1. Submit to Google Sheets (using urlencoded parameter format)
-      const urlEncodedData = new URLSearchParams();
-      urlEncodedData.append("name", name);
-      urlEncodedData.append("phone", phone);
-      urlEncodedData.append("email", formData.email);
-      urlEncodedData.append("eventType", formData.eventType);
-      urlEncodedData.append("eventDate", formData.eventDate);
-      urlEncodedData.append("message", formData.message);
-
+      // 1. Submit to Google Sheets (raw JSON post payload with keepalive)
       fetch(GOOGLE_SHEET_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        body: urlEncodedData
-      })
-      .then(() => {
-        // 2. Open WhatsApp
-        const whatsappMessage = 
-`🔥 New Direct WhatsApp Inquiry
+        keepalive: true,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }).catch(err => console.error("Google Sheet save error:", err));
+
+      // 2. Open WhatsApp (full message with name, phone, event type, message)
+      const whatsappMessage =
+`🔥 New Booking Lead
 
 👤 Name: ${name}
 📞 Phone: ${phone}
+🎉 Event Type: ${eventType}
+💬 Message: ${customMsg}
 📄 Source: Direct WhatsApp button on ${window.location.pathname}`;
 
-        const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
-        const whatsappURL = `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
-        
-        window.open(whatsappURL, "_blank");
+      const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
+      const whatsappURL = `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
+      
+      const newWindow = window.open(whatsappURL, "_blank");
+      if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+        window.location.href = whatsappURL;
+      }
 
-        // Clean up
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        waModal.classList.remove('show');
-        waForm.reset();
-      })
-      .catch(err => {
-        console.error("Google Sheet save error:", err);
-        // Fail-safe open WhatsApp anyway
-        const whatsappMessage = `👤 Name: ${name}\n📞 Phone: ${phone}`;
-        const separator = WHATSAPP_LINK.includes('?') ? '&' : '?';
-        const whatsappURL = `${WHATSAPP_LINK}${separator}text=${encodeURIComponent(whatsappMessage)}`;
-        window.open(whatsappURL, "_blank");
-        
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-        waModal.classList.remove('show');
-        waForm.reset();
-      });
+      // Clean up
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      waModal.classList.remove('show');
+      waForm.reset();
     });
   }
 
